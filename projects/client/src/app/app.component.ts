@@ -6,8 +6,24 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'client';
+  resumeCrafterWindow: Window | null | undefined;
+
+  ngOnInit(): void {
+    const iframe = document.querySelector('iframe');
+
+    this.resumeCrafterWindow = iframe?.contentWindow;
+
+    setTimeout(() => {
+      this.sendDataToResumeCrafter({
+        name: 'Manoj Reddy',
+      });
+    }, 5000);
+  }
+
+  sendDataToResumeCrafter(data: any): void {
+    this.resumeCrafterWindow?.postMessage(data, 'http://localhost:50232/');
+  }
 }
