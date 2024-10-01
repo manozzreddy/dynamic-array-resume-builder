@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { BasicTemplateComponent } from './basic-template/basic-template.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,BasicTemplateComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

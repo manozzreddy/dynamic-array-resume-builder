@@ -1,0 +1,113 @@
+<div class="p-8">
+  <!-- Basic Details-->
+  <div class="text-center font-bold uppercase text-3xl">
+    {{ resumeData.name }}
+  </div>
+
+  <div class="mt-1 text-center text-base">
+    {{ resumeData.phoneNumber }} | {{ resumeData.email }} |
+    {{ resumeData.location }}
+  </div>
+
+  <!-- Professional summary -->
+  @if (resumeData.professionalSummary) {
+  <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
+    <div class="pb-2 text-lg font-bold uppercase">Professional summary</div>
+    <div class="pt-2 text-base">
+      {{ resumeData.professionalSummary }}
+    </div>
+  </div>
+  }
+
+  <!-- Professional Experience -->
+  @if (resumeData.experience.length) {
+  <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
+    <div class="pb-2 text-lg font-bold uppercase">Experience</div>
+    <div class="pt-2 text-base">
+      @for (item of resumeData.experience; track $index) {
+
+      <div class="pt-1 flex justify-between">
+        <span class="font-bold">{{ item.role }}</span>
+        <span>{{ item.startDate }} - {{ item.endDate }}</span>
+      </div>
+
+      <div class="pt-1 pl-1 font-medium">
+        {{ item.company }}
+      </div>
+
+      <ul class="pl-9 list-disc">
+        @for (responsibility of item.responsibilities; track $index) {
+        <li>
+          {{ responsibility }}
+        </li>
+        }
+      </ul>
+      }
+    </div>
+  </div>
+  }
+
+  <!-- Education -->
+  @if (resumeData.education.length) {
+  <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
+    <div class="pb-2 text-lg font-bold uppercase">Education</div>
+    <div class="pt-2 text-base">
+      @for (item of resumeData.education; track $index) {
+
+      <div class="pt-1 flex justify-between">
+        <span class="font-bold">{{ item.degree }}</span>
+        <span>{{ item.startDate }} - {{ item.endDate }}</span>
+      </div>
+
+      <div class="pt-1 font-medium">
+        {{ item.institution }}
+      </div>
+
+      }
+    </div>
+  </div>
+  }
+
+  <!-- Additional information-->
+  @if(resumeData.certifications.length || resumeData.technicalSkills.length ||
+  resumeData.languages.length){
+  <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
+    <div class="pb-2 text-lg font-bold uppercase">Additional Information</div>
+
+    <div class="text-base">
+      
+        <!-- Certifications -->
+      @if(resumeData.certifications.length){
+      <div class="pt-2">
+        <div class="pb-2 text-lg font-medium">Certifications</div>
+
+        <ul class="pl-9 list-disc">
+          @for (item of resumeData.certifications; track $index) {
+          <li>
+            {{ item }}
+          </li>
+          }
+        </ul>
+      </div>
+      }
+
+      <!-- Technical skills -->
+      @if(resumeData.technicalSkills.length){
+      <div class="pt-2">
+        <div class="pb-2 text-lg font-medium">Technical skills</div>
+        {{ resumeData.technicalSkills.join(", ") }}
+      </div>
+      }
+
+      <!-- Languages -->
+      @if(resumeData.languages.length){
+      <div class="pt-2">
+        <div class="pb-2 text-lg font-medium">Languages</div>
+
+        {{ resumeData.languages.join(", ") }}
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>
