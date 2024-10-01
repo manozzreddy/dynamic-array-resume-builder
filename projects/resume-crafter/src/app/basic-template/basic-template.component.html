@@ -1,3 +1,4 @@
+@if(resumeData){
 <div class="p-8">
   <!-- Basic Details-->
   <div class="text-center font-bold uppercase text-3xl">
@@ -75,8 +76,7 @@
     <div class="pb-2 text-lg font-bold uppercase">Additional Information</div>
 
     <div class="text-base">
-      
-        <!-- Certifications -->
+      <!-- Certifications -->
       @if(resumeData.certifications.length){
       <div class="pt-2">
         <div class="pb-2 text-lg font-medium">Certifications</div>
@@ -111,3 +111,4 @@
   </div>
   }
 </div>
+}
