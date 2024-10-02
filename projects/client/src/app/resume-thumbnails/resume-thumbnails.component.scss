@@ -1,0 +1,27 @@
+@import './../../variables.scss';
+
+.scrolling-container {
+    overflow: hidden; // Hide overflow to create a clean scroll
+    position: relative;
+}
+
+.scrolling-content {
+    display: flex;
+    flex-direction: column;
+    animation: scroll 60s linear infinite; // Adjust speed as needed
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%); // Adjust based on the total height of the images
+    }
+}
+
+img {
+    width: 250px;
+    margin-bottom: 8px; // Space between images
+}
