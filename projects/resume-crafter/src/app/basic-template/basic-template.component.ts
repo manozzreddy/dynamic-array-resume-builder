@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ResumeData } from '../../../../../libs/shared-types/src';
 
 @Component({

@@ -12,7 +12,7 @@ import { ResumeData } from '../../../../libs/shared-types/src';
 })
 export class AppComponent implements OnInit {
   title = 'resume-crafter';
-  resumeData?: ResumeData | undefined;
+  resumeData?: ResumeData;
 
   ngOnInit(): void {
     window.addEventListener('message', (event) => {

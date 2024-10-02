@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+# Steps to deploy both apps
+1. ng build client --aot
+2. ng build resume-crafter --aot
+3. firebase deploy --only hosting

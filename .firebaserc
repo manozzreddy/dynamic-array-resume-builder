@@ -1,0 +1,19 @@
+{
+  "projects": {
+    "default": "dynamic-array-resume-builder"
+  },
+  "targets": {
+    "dynamic-array-resume-builder": {
+      "hosting": {
+        "client": [
+          "dynamic-array-resume-builder"
+        ],
+        "resume-crafter": [
+          "dynamic-array-resume-crafter"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
