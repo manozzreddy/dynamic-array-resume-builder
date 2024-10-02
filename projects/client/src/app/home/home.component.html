@@ -1,0 +1,30 @@
+<mat-toolbar class="flex justify-between">
+  <span>Resume Builder</span>
+  <div class="flex items-center justify-end">
+    <button mat-button>Resume</button>
+    <button mat-button>Cover Letter</button>
+    
+    <!-- Vertical line -->
+    <div class="h-8 w-px bg-gray-300 mx-10"></div> <!-- Adjust height as needed -->
+    
+    <button mat-stroked-button><span class="uppercase">Log in</span></button>
+    <button mat-flat-button class="ml-2">
+      <span class="uppercase">Build resume</span>
+    </button>
+  </div>
+</mat-toolbar>
+
+<div class="grid grid-cols-2 gap-4">
+  <div class="ml-16 flex flex-col justify-center app-content-height">
+    <div class="mat-display-large">Create a resume that secures your dream</div>
+    <div class="mat-headline-medium">
+      Create a resume that secures your dream
+    </div>
+
+    <div class="w-auto uppercase">
+      <button mat-flat-button>Build resume</button>
+    </div>
+  </div>
+
+  <app-resume-thumbnails></app-resume-thumbnails>
+</div>
