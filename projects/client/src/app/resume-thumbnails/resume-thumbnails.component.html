@@ -16,13 +16,11 @@
         }
       </div>
       <div>
-        <div>
-          @for (image of images; track $index) {
-          <div class="shadow-xl mt-10">
-            <img [src]="image" alt="Resume Thumbnail" />
-          </div>
-          }
+        @for (image of images; track $index) {
+        <div class="shadow-xl mt-10">
+          <img [src]="image" alt="Resume Thumbnail" />
         </div>
+        }
       </div>
     </div>
   </div>

@@ -1,19 +1,32 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
 import { onRequest } from 'firebase-functions/v2/https';
-import * as logger from 'firebase-functions/logger';
+import * as puppeteer from 'puppeteer';
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+export const generateResume = onRequest(async (request, response) => {
+  const browser = await puppeteer.launch({
+    headless: true,
+    timeout: 120000,
+    args: ['--no-sandbox'],
+  });
 
-export const helloWorld = onRequest((request, response) => {
-  logger.info('Hello logs!', { structuredData: true });
-  response.send('Hello from Firebase!');
+  // Create a new page in the browser
+  const page = await browser.newPage();
+
+  await page.goto('https://dynamic-array-resume-crafter.web.app/', {
+    waitUntil: 'networkidle2',
+  });
+
+  // Generate a PDF file
+  const resume = await page.pdf({
+    format: 'A4',
+    printBackground: true,
+  });
+
+  // Close the browser
+  await browser.close();
+
+  // Set response headers for the PDF
+  response.setHeader('Content-Type', 'application/pdf');
+  response.setHeader('Content-disposition', 'inline; filename=Resume.pdf');
+
+  response.send(Buffer.from(resume));
 });

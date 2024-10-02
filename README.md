@@ -31,3 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 1. ng build client --aot
 2. ng build resume-crafter --aot
 3. firebase deploy --only hosting
+
+# To deploy all firebase functions
+firebase deploy --only functions     
