@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ResumeThumbnailsComponent } from '../resume-thumbnails/resume-thumbnails.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { ContributorProfileComponent } from '../contributor-profile/contributor-profile.component';
 
 @Component({
@@ -10,7 +9,6 @@ import { ContributorProfileComponent } from '../contributor-profile/contributor-
   standalone: true,
   imports: [
     MatButtonModule,
-    MatIconModule,
     ResumeThumbnailsComponent,
     MatToolbarModule,
     ContributorProfileComponent
