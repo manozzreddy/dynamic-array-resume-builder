@@ -8,7 +8,7 @@
 .scrolling-content {
     display: flex;
     flex-direction: column;
-    animation: scroll 60s linear infinite; // Adjust speed as needed
+    animation: scroll 30s linear infinite; // Adjust speed as needed
 }
 
 @keyframes scroll {

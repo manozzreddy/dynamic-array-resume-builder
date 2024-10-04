@@ -16,3 +16,35 @@ body {
 .app-content-height {
     height: calc(100vh - #{$mat-toolbar-height}); // Height for app content
 }
+
+/* scroll bar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background-color: $scrollbar-track-color;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: $scrollbar-track-piece-color;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: $light-grey;
+    border-radius: 36px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: $scrollbar-corner-color;
+}
+
+::-webkit-resizer {
+    background-color: $dark-grey;
+}

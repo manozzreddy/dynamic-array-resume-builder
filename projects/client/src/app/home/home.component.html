@@ -1,30 +1,138 @@
 <mat-toolbar class="flex justify-between">
-  <span>Resume Builder</span>
+  <img class="h-full py-2" src="assets/images/logo.png" alt="Resume Builder" />
+
   <div class="flex items-center justify-end">
-    <button mat-button>Resume</button>
-    <button mat-button>Cover Letter</button>
-    
-    <!-- Vertical line -->
-    <div class="h-8 w-px bg-gray-300 mx-10"></div> <!-- Adjust height as needed -->
-    
     <button mat-stroked-button><span class="uppercase">Log in</span></button>
-    <button mat-flat-button class="ml-2">
-      <span class="uppercase">Build resume</span>
-    </button>
   </div>
 </mat-toolbar>
 
-<div class="grid grid-cols-2 gap-4">
-  <div class="ml-16 flex flex-col justify-center app-content-height">
-    <div class="mat-display-large">Create a resume that secures your dream</div>
-    <div class="mat-headline-medium">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="px-4 md:pl-6 lg:pl-32 flex flex-col justify-center pt-10">
+    <div class="mat-display-large opacity-80">
       Create a resume that secures your dream
     </div>
 
-    <div class="w-auto uppercase">
+    <div class="mat-title-large opacity-80">
+      Create a resume that secures your dream
+    </div>
+
+    <div class="w-auto uppercase pt-7">
       <button mat-flat-button>Build resume</button>
     </div>
   </div>
 
   <app-resume-thumbnails></app-resume-thumbnails>
 </div>
+
+<div class="px-4 py-10 md:px-6 md:py-20 lg:px-32 lg:py-44">
+  <div class="mat-display-large text-center opacity-80">
+    Create a resume that secures your dream
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    @for (item of items; track $index) {
+    <div class="flex flex-col items-center">
+      <img class="h-80" [src]="item.image" alt="" />
+      <div class="mat-headline-medium text-center pt-5 opacity-80">
+        {{ item.title }}
+      </div>
+      <div class="mat-body-large px-16 text-center opacity-80">
+        {{ item.subtitle }}
+      </div>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- Cover letter-->
+<div
+  class="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-gray-50 px-4 py-10 md:px-6 md:py-20 lg:px-32 lg:py-44"
+>
+  <div class="flex justify-center items-center">
+    <div class="relative w-36 lg:w-72 h-72">
+      <img
+        class="absolute left-[-50px] w-36 lg:w-56 rotate-[-25deg] z-10 shadow-xl"
+        src="https://d.novoresume.com/images/doc/creative-resume-template.png"
+        alt="Creative Resume Template"
+      />
+      <img
+        class="absolute left-1/2 transform -translate-x-1/2 translate-y-[-10px] w-36 lg:w-56 rotate-[0deg] z-20 shadow-xl"
+        src="https://d.novoresume.com/images/doc/basic-resume-template.png"
+        alt="Basic Resume Template"
+      />
+      <img
+        class="absolute right-[-50px] w-36 lg:w-56 rotate-[25deg] z-30 shadow-xl"
+        src="https://d.novoresume.com/images/doc/combined-resume-template.png"
+        alt="Combined Resume Template"
+      />
+    </div>
+  </div>
+
+  <div class="mt-7 lg:mt-0">
+    <div class="mat-display-large opacity-80">
+      Create a cover letter that secures your dream
+    </div>
+    <div class="mat-headline-medium opacity-80 mx-7">
+      Create a resume that secures your dream
+    </div>
+    <button mat-flat-button class="ml-2">
+      <span class="uppercase">Create your Cover Letter</span>
+    </button>
+  </div>
+</div>
+
+<!-- Why choose us -->
+<div class="px-4 py-10 md:px-6 md:py-20 lg:px-32 lg:py-44">
+  <div class="mat-display-large opacity-80 text-center">Why choose us?</div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    @for (item of whyChooseUsTiles; track $index) {
+    <div class="flex items-center">
+      <img [src]="item.image" class="w-16 h-16 mr-4" [alt]="item.title" />
+      <div>
+        <div class="mat-title-medium">{{ item.title }}</div>
+        <div class="mat-body-large">{{ item.subtitle }}</div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+
+<!-- About the creators -->
+<div class="px-4 py-10 md:px-6 md:py-20 lg:px-32 lg:py-44">
+  <div class="mat-display-large opacity-80 text-center">About the creators</div>
+  <div class="mat-body-large opacity-80 text-center">
+    Our mission is to provide a free, open-source resume-building platform that
+    empowers individuals from all backgrounds to craft compelling resumes
+    without financial barriers. We believe that everyone deserves the
+    opportunity to present their skills and experiences effectively. By
+    leveraging open-source technology, we foster collaboration and innovation,
+    allowing users to customize their resumes while contributing to a
+    community-driven project. Our goal is to make resume creation accessible,
+    flexible, and user-friendly, helping job seekers navigate their career paths
+    with confidence. You can clone this project
+    <a
+      class="underline font-semibold text-[#005CBB]"
+      href="https://github.com/manozzreddy/dynamic-array-resume-builder"
+      target="_blank"
+      >here</a
+    >.
+  </div>
+
+  <div class="flex flex-col sm:flex-row sm:justify-evenly mt-10 gap-10">
+    <app-contributor-profile
+      contributorInfo="Project developed by Manoj"
+      imageUrl="assets/images/manoj.png"
+      githubUrl="https://github.com/manozzreddy/dynamic-array-resume-builder"
+      linkedinUrl="https://www.linkedin.com/in/manojreddygangarapu"
+    ></app-contributor-profile>
+
+    <app-contributor-profile
+      contributorInfo="Project designed by Lokesh"
+      imageUrl="assets/images/lokesh.png"
+      linkedinUrl="https://www.linkedin.com/in/marupuri-lokesh-naidu/"
+      portfolioUrl="https://portfolio-lokesh.my.canva.site/"
+    ></app-contributor-profile>
+  </div>
+</div>
+
+<div class="h-80 bg-gray-50"></div>

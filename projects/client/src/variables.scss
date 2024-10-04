@@ -1,1 +1,9 @@
+@import './colors.scss';
+
 $mat-toolbar-height: 64px;
+
+//== Scroll bar
+$scrollbar-track-color: $light-grey;
+$scrollbar-track-piece-color: $white;
+$scrollbar-thumb-color: $light-grey;
+$scrollbar-corner-color: $light-grey;
