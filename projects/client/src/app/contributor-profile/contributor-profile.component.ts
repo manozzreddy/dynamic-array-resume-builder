@@ -14,5 +14,4 @@ export class ContributorProfileComponent {
   @Input() githubUrl?: string;
   @Input() linkedinUrl?: string;
   @Input() portfolioUrl?: string;
-
 }
