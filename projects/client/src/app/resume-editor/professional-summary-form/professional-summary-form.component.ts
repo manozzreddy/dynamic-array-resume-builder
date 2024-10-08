@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { FormControlReadyEvent } from '../resume-editor.component';
 
 @Component({
   selector: 'app-professional-summary-form',
@@ -10,10 +16,27 @@ import {FormsModule} from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './professional-summary-form.component.html',
-  styleUrl: './professional-summary-form.component.scss'
+  styleUrl: './professional-summary-form.component.scss',
 })
 export class ProfessionalSummaryFormComponent {
+  @Input({ required: true }) parentForm!: FormGroup;
 
+  @Output() professionalSummaryFormReady: EventEmitter<FormControlReadyEvent> =
+    new EventEmitter<FormControlReadyEvent>();
+
+  public professionalSummaryFormControl: FormControl<string | null>;
+
+  constructor() {
+    this.professionalSummaryFormControl = new FormControl('');
+  }
+
+  ngOnInit(): void {
+    this.professionalSummaryFormReady.emit({
+      name: 'professionalSummary',
+      form: this.professionalSummaryFormControl,
+    });
+  }
 }

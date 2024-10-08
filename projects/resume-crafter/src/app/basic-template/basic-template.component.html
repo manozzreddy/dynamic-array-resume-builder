@@ -2,12 +2,12 @@
 <div class="p-8">
   <!-- Basic Details-->
   <div class="text-center font-bold uppercase text-3xl">
-    {{ resumeData.fullName }}
+    {{ resumeData.personalDetails.fullName }}
   </div>
 
   <div class="mt-1 text-center text-base">
-    {{ resumeData.phoneNumber }} | {{ resumeData.email }} |
-    {{ resumeData.location }}
+    {{ resumeData.personalDetails.phoneNumber }} | {{ resumeData.personalDetails.email }} |
+    {{ resumeData.personalDetails.location }}
   </div>
 
   <!-- Professional summary -->
@@ -21,7 +21,7 @@
   }
 
   <!-- Professional Experience -->
-  @if (resumeData.experience.length) {
+  @if (resumeData.experience?.length) {
   <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
     <div class="pb-2 text-lg font-bold uppercase">Experience</div>
     <div class="pt-2 text-base">
@@ -49,7 +49,7 @@
   }
 
   <!-- Education -->
-  @if (resumeData.education.length) {
+  @if (resumeData.education?.length) {
   <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
     <div class="pb-2 text-lg font-bold uppercase">Education</div>
     <div class="pt-2 text-base">
@@ -70,14 +70,14 @@
   }
 
   <!-- Additional information-->
-  @if(resumeData.certifications.length || resumeData.technicalSkills.length ||
-  resumeData.languages.length){
+  @if(resumeData.certifications?.length || resumeData.technicalSkills?.length ||
+  resumeData.languages?.length){
   <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
     <div class="pb-2 text-lg font-bold uppercase">Additional Information</div>
 
     <div class="text-base">
       <!-- Certifications -->
-      @if(resumeData.certifications.length){
+      @if(resumeData.certifications?.length){
       <div class="pt-2">
         <div class="pb-2 text-lg font-medium">Certifications</div>
 
@@ -92,19 +92,19 @@
       }
 
       <!-- Technical skills -->
-      @if(resumeData.technicalSkills.length){
+      @if(resumeData.technicalSkills?.length){
       <div class="pt-2">
         <div class="pb-2 text-lg font-medium">Technical skills</div>
-        {{ resumeData.technicalSkills.join(", ") }}
+        {{ resumeData.technicalSkills?.join(", ") }}
       </div>
       }
 
       <!-- Languages -->
-      @if(resumeData.languages.length){
+      @if(resumeData.languages?.length){
       <div class="pt-2">
         <div class="pb-2 text-lg font-medium">Languages</div>
 
-        {{ resumeData.languages.join(", ") }}
+        {{ resumeData.languages?.join(", ") }}
       </div>
       }
     </div>

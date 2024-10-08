@@ -5,7 +5,80 @@
   list your skills.
 </div>
 
-<button mat-button class="mt-7">
+<mat-accordion>
+  @for (item of formControls; track $index) { @let jobTitle =
+  item.get("jobTitle")?.value; @let startDate = item.get("startDate")?.value;
+  @let endDate = item.get("endDate")?.value;
+
+  <div [formGroup]="item" class="mt-3">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ jobTitle?.length > 0 ? jobTitle : "(Not Specified)" }}
+        </mat-panel-title>
+
+        <mat-panel-description>
+          {{ startDate | date : "MMM YYYY" }}
+          @if(startDate && endDate){ - }
+          {{ endDate | date : "MMM YYYY" }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <!-- Expansion panel body -->
+      <ng-container>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+          <mat-form-field>
+            <mat-label>Job title</mat-label>
+            <input matInput formControlName="jobTitle" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Employer</mat-label>
+            <input matInput formControlName="employer" />
+          </mat-form-field>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+          <div class="grid grid-cols-2 gap-x-4">
+            <mat-form-field>
+              <mat-label>Start Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="startDatePicker"
+                formControlName="startDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="startDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>End date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="endDatePicker"
+                formControlName="endDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="endDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <mat-form-field>
+            <mat-label>Location</mat-label>
+            <input matInput formControlName="location" />
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </mat-expansion-panel>
+  </div>
+  }
+</mat-accordion>
+
+<button mat-button class="mt-7" (click)="addEmployment()">
   <mat-icon fontIcon="add"></mat-icon>
   Add employment
 </button>

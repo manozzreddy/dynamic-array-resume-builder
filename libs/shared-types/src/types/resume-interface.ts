@@ -1,15 +1,19 @@
 export interface ResumeData {
-  fullName: string;
-  phoneNumber: string;
-  email: string;
-  location: string;
+  personalDetails: PersonalDetails;
   professionalSummary: string;
 
-  experience: ProfessionalExperience[];
-  education: Education[];
-  certifications: string[];
-  technicalSkills: string[];
-  languages: string[];
+  experience?: ProfessionalExperience[];
+  education?: Education[];
+  certifications?: string[];
+  technicalSkills?: string[];
+  languages?: string[];
+}
+
+export interface PersonalDetails {
+  email: string;
+  fullName: string;
+  location: string;
+  phoneNumber: string;
 }
 
 export interface ProfessionalExperience {

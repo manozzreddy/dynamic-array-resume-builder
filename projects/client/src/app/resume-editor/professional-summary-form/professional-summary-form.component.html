@@ -4,7 +4,13 @@
   and what you did. What were the big achievements? Describe your motivation and
   list your skills.
 </div>
-<mat-form-field class="mt-5 w-full">
-  <mat-label>Professional summary</mat-label>
-  <textarea matInput rows="5"></textarea>
-</mat-form-field>
+<div [formGroup]="parentForm">
+  <mat-form-field class="mt-5 w-full">
+    <mat-label>Professional summary</mat-label>
+    <textarea
+      matInput
+      rows="5"
+      formControlName="professionalSummary"
+    ></textarea>
+  </mat-form-field>
+</div>

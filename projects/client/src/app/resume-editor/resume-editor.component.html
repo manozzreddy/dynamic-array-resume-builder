@@ -1,8 +1,15 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-  <form [formGroup]="resumeForm" class="p-10 grid gap-y-8">
-    <app-personal-details-form></app-personal-details-form>
-    <app-professional-summary-form></app-professional-summary-form>
-    <app-employment-history-form></app-employment-history-form>
+  <form [formGroup]="resumeForm" class="p-3 md:p-5 lg:p-7 grid gap-y-8">
+    <app-personal-details-form
+      (personalDetailsFormReady)="subFormControlReady($event)"
+    ></app-personal-details-form>
+    <app-professional-summary-form
+      [parentForm]="resumeForm"
+      (professionalSummaryFormReady)="subFormControlReady($event)"
+    ></app-professional-summary-form>
+    <app-employment-history-form
+      (employmentHistoryFormArrayReady)="subFormControlReady($event)"
+    ></app-employment-history-form>
     <app-education-form></app-education-form>
     <app-websites-social-links-form></app-websites-social-links-form>
     <app-skills-form></app-skills-form>
