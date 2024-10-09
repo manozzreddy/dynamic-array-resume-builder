@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -11,9 +11,10 @@ import { FormControlReadyEvent } from '../resume-editor.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatExpansionModule, MatAccordion } from '@angular/material/expansion';
-import { DatePipe } from '@angular/common';
-import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DatePipe, CommonModule } from '@angular/common';
+import { SortableAccordionPanelComponent } from '../sortable-accordion-panel/sortable-accordion-panel.component';
+import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor.component';
 
 @Component({
   selector: 'app-employment-history-form',
@@ -27,10 +28,10 @@ import { CommonModule } from '@angular/common';
     MatNativeDateModule,
     MatExpansionModule,
     CommonModule,
+    SortableAccordionPanelComponent,
+    CommonNgxEditorComponent,
   ],
-  providers : [
-    DatePipe,
-  ],
+  providers: [DatePipe],
   templateUrl: './employment-history-form.component.html',
   styleUrl: './employment-history-form.component.scss',
 })
@@ -39,9 +40,6 @@ export class EmploymentHistoryFormComponent implements OnInit {
   employmentHistoryFormArrayReady: EventEmitter<FormControlReadyEvent> =
     new EventEmitter<FormControlReadyEvent>();
   employmentHistoryFormArray: FormArray<any> = new FormArray(<any>[]);
-
-  @ViewChild(MatAccordion) accordion?: MatAccordion;
-
 
   constructor() {}
 
@@ -61,8 +59,13 @@ export class EmploymentHistoryFormComponent implements OnInit {
         endDate: new FormControl(''),
         location: new FormControl(''),
         responsibilities: new FormControl(''),
+        description: new FormControl(''),
       })
     );
+  }
+
+  deleteEmployment(index: number) {
+    this.employmentHistoryFormArray.removeAt(index);
   }
 
   get formControls(): FormGroup[] {

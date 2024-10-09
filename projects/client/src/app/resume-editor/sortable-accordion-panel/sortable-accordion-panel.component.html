@@ -1,0 +1,49 @@
+<mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
+  @for (item of formControls; track $index) {
+
+  <div class="my-2 flex flex-row items-center" cdkDrag>
+    <div class="mx-2 cursor-move opacity-40" cdkDragHandle>
+      <mat-icon>drag_indicator</mat-icon>
+    </div>
+
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <ng-container
+            *ngTemplateOutlet="panelTitleTemplate; context: { $implicit: item }"
+          >
+          </ng-container>
+        </mat-panel-title>
+
+        <mat-panel-description>
+          <ng-container
+            *ngTemplateOutlet="
+              panelDescriptionTemplate;
+              context: { $implicit: item }
+            "
+          >
+          </ng-container>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <!-- Expansion panel body -->
+      <ng-container
+        *ngTemplateOutlet="formTemplate; context: { $implicit: item }"
+      ></ng-container>
+    </mat-expansion-panel>
+
+    <button
+      class="mx-2 opacity-40"
+      mat-icon-button
+      (click)="onDelete($index)"
+    >
+      <mat-icon>delete_outlined</mat-icon>
+    </button>
+  </div>
+  }
+</mat-accordion>
+
+<button mat-button class="mt-2" (click)="onAdd()">
+  <mat-icon fontIcon="add"></mat-icon>
+  Add employment
+</button>

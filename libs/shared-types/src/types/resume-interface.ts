@@ -17,11 +17,11 @@ export interface PersonalDetails {
 }
 
 export interface ProfessionalExperience {
-  company: string;
-  role: string;
+  employer: string;
+  jobTitle: string;
   startDate: string; // ISO date format (YYYY-MM-DD)
   endDate: string; // ISO date format (YYYY-MM-DD) or 'Present'
-  responsibilities: string[];
+  description: string;
 }
 
 export interface Education {
