@@ -4,13 +4,9 @@
   and what you did. What were the big achievements? Describe your motivation and
   list your skills.
 </div>
-<div [formGroup]="parentForm">
-  <mat-form-field class="mt-5 w-full">
-    <mat-label>Professional summary</mat-label>
-    <textarea
-      matInput
-      rows="5"
-      formControlName="professionalSummary"
-    ></textarea>
-  </mat-form-field>
+
+<div class="mt-5 w-full">
+  <app-common-ngx-editor
+  [control]="professionalSummaryFormControl"
+></app-common-ngx-editor>
 </div>

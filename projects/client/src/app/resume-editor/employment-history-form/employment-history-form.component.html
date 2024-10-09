@@ -10,7 +10,7 @@
   [panelTitleTemplate]="panelTitle"
   [panelDescriptionTemplate]="panelDescription"
   [formTemplate]="form"
-  addButtonText="Add employment"
+  entityType="employment"
   (addClicked)="addEmployment()"
   (deleteClicked)="deleteEmployment($event)"
 >
@@ -85,6 +85,6 @@
       </mat-form-field>
     </div>
 
-    <app-common-ngx-editor [form]="item"></app-common-ngx-editor>
+    <app-common-ngx-editor  [control]="item.get('description')"></app-common-ngx-editor>
   </div>
 </ng-template>

@@ -16,7 +16,7 @@
   <div class="pt-5 grid grid-cols-1 divide-y divide-gray-400">
     <div class="pb-2 text-lg font-bold uppercase">Professional summary</div>
     <div class="pt-2 text-base">
-      {{ resumeData.professionalSummary }}
+      <div [innerHtml]="resumeData.professionalSummary | safeHtml"></div>
     </div>
   </div>
   }

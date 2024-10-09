@@ -6,7 +6,7 @@
       <mat-icon>drag_indicator</mat-icon>
     </div>
 
-    <mat-expansion-panel expanded="true">
+    <mat-expansion-panel class="w-full" expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <ng-container
@@ -32,11 +32,7 @@
       ></ng-container>
     </mat-expansion-panel>
 
-    <button
-      class="mx-2 opacity-40"
-      mat-icon-button
-      (click)="onDelete($index)"
-    >
+    <button class="mx-2 opacity-40" mat-icon-button (click)="onTapDelete($index)">
       <mat-icon>delete_outlined</mat-icon>
     </button>
   </div>
@@ -45,5 +41,5 @@
 
 <button mat-button class="mt-2" (click)="onAdd()">
   <mat-icon fontIcon="add"></mat-icon>
-  Add employment
+  Add {{ entityType }}
 </button>

@@ -1,9 +1,92 @@
 <div class="mat-headline-small">Education</div>
 <div class="mat-body-large">
-    Write 2-4 short, energetic sentences about how great you are. Mention the role and what you did. What were the big achievements? Describe your motivation and list your skills.
+  Write 2-4 short, energetic sentences about how great you are. Mention the role
+  and what you did. What were the big achievements? Describe your motivation and
+  list your skills.
 </div>
 
-<button mat-button class="mt-7">
-  <mat-icon fontIcon="add"></mat-icon>
-  Add education
-</button>
+<app-sortable-accordion-panel
+  [formControls]="formControls"
+  [panelTitleTemplate]="panelTitle"
+  [panelDescriptionTemplate]="panelDescription"
+  [formTemplate]="form"
+  entityType="education"
+  (addClicked)="addEducation()"
+  (deleteClicked)="deleteEducation($event)"
+>
+</app-sortable-accordion-panel>
+
+<ng-template #panelTitle let-item>
+  @let degree = item.get("degree")?.value; @let school =
+  item.get("school")?.value;
+
+  {{ degree?.length > 0 ? degree : "(Not Specified)" }}
+
+  @if(degree?.length > 0 && school?.length > 0){ at {{ school }}
+  }
+</ng-template>
+
+<ng-template #panelDescription let-item>
+  @let startDate = item.get("startDate")?.value; @let endDate =
+  item.get("endDate")?.value;
+
+  {{ startDate | date : "MMM YYYY" }}
+  @if(startDate && endDate){ - }
+  {{ endDate | date : "MMM YYYY" }}
+</ng-template>
+
+<ng-template #form let-item>
+  <div [formGroup]="item">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+      <mat-form-field>
+        <mat-label>Degree</mat-label>
+        <input matInput formControlName="degree" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>School</mat-label>
+        <input matInput formControlName="school" />
+      </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+      <div class="grid grid-cols-2 gap-x-4">
+        <mat-form-field>
+          <mat-label>Start Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startDatePicker"
+            formControlName="startDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="startDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>End date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endDatePicker"
+            formControlName="endDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="endDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location" />
+      </mat-form-field>
+    </div>
+
+    <app-common-ngx-editor
+      [control]="item.get('description')"
+    ></app-common-ngx-editor>
+  </div>
+</ng-template>

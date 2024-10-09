@@ -58,7 +58,6 @@ export class EmploymentHistoryFormComponent implements OnInit {
         startDate: new FormControl(''),
         endDate: new FormControl(''),
         location: new FormControl(''),
-        responsibilities: new FormControl(''),
         description: new FormControl(''),
       })
     );

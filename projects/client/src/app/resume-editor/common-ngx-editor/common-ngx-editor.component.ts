@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
 
 @Component({
@@ -13,7 +13,7 @@ import { Editor, NgxEditorModule, Toolbar } from 'ngx-editor';
   styleUrl: './common-ngx-editor.component.scss'
 })
 export class CommonNgxEditorComponent {
-  @Input({required : true}) form!: FormGroup;
+  @Input({required : true}) control!: FormControl;
 
   editor: Editor;
   toolbar: Toolbar = [

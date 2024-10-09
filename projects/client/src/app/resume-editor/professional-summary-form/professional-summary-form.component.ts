@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { FormControlReadyEvent } from '../resume-editor.component';
+import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor.component';
 
 @Component({
   selector: 'app-professional-summary-form',
@@ -17,13 +18,12 @@ import { FormControlReadyEvent } from '../resume-editor.component';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonNgxEditorComponent,
   ],
   templateUrl: './professional-summary-form.component.html',
   styleUrl: './professional-summary-form.component.scss',
 })
 export class ProfessionalSummaryFormComponent {
-  @Input({ required: true }) parentForm!: FormGroup;
-
   @Output() professionalSummaryFormReady: EventEmitter<FormControlReadyEvent> =
     new EventEmitter<FormControlReadyEvent>();
 

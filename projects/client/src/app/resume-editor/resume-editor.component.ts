@@ -49,7 +49,7 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
         
         this.getResumeCrafterWindow?.postMessage(
           value as ResumeData,
-          'http://localhost:63280/'
+          'http://localhost:53258/'
         );
       }
     );
