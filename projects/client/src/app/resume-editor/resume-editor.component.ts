@@ -14,7 +14,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ResumeData } from '../../../../../libs/shared-types/src';
+import {
+  ProfessionalExperience,
+  ResumeData,
+} from '../../../../../libs/shared-types/src';
+import { MonthYearPickerComponent } from './month-year-picker/month-year-picker.component';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-resume-editor',
@@ -44,12 +49,49 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formDataChangesSubscription = this.resumeForm.valueChanges.subscribe(
-      (value) => {
-        console.log(value);
-        
+      (resumeData) => {
+        console.log(resumeData);
+
+        /// TODO(Manoj): Refactor this portion.
+        for (let index in resumeData['experience']) {
+          let experience = resumeData['experience'][index];
+          let startDate = experience.startDate;
+          let endDate = experience.endDate;
+
+          if (startDate) {
+            resumeData['experience'][index]['startDate'] = (
+              startDate as Moment
+            ).toISOString();
+          }
+
+          if (endDate) {
+            resumeData['experience'][index]['endDate'] = (
+              endDate as Moment
+            ).toISOString();
+          }
+        }
+
+        for (let index in resumeData['education']) {
+          let education = resumeData['education'][index];
+          let startDate = education.startDate;
+          let endDate = education.endDate;
+
+          if (startDate) {
+            resumeData['education'][index]['startDate'] = (
+              startDate as Moment
+            ).toISOString();
+          }
+
+          if (endDate) {
+            resumeData['education'][index]['endDate'] = (
+              endDate as Moment
+            ).toISOString();
+          }
+        }
+
         this.getResumeCrafterWindow?.postMessage(
-          value as ResumeData,
-          'http://localhost:53258/'
+          resumeData as ResumeData,
+          'http://localhost:58618/'
         );
       }
     );
@@ -76,5 +118,5 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
 export interface FormControlReadyEvent {
   name: string;
-  form: FormGroup | FormControl<string | null> |  FormArray<any>;
+  form: FormGroup | FormControl<string | null> | FormArray<any>;
 }

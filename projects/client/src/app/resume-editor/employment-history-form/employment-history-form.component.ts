@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -15,6 +15,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { DatePipe, CommonModule } from '@angular/common';
 import { SortableAccordionPanelComponent } from '../sortable-accordion-panel/sortable-accordion-panel.component';
 import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor.component';
+import moment from 'moment';
+import { MonthYearPickerComponent } from '../month-year-picker/month-year-picker.component';
 
 @Component({
   selector: 'app-employment-history-form',
@@ -30,15 +32,15 @@ import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor
     CommonModule,
     SortableAccordionPanelComponent,
     CommonNgxEditorComponent,
+    MonthYearPickerComponent,
   ],
   providers: [DatePipe],
   templateUrl: './employment-history-form.component.html',
   styleUrl: './employment-history-form.component.scss',
 })
 export class EmploymentHistoryFormComponent implements OnInit {
-  @Output()
-  employmentHistoryFormArrayReady: EventEmitter<FormControlReadyEvent> =
-    new EventEmitter<FormControlReadyEvent>();
+  employmentHistoryFormArrayReady = output<FormControlReadyEvent>();
+
   employmentHistoryFormArray: FormArray<any> = new FormArray(<any>[]);
 
   constructor() {}
@@ -55,8 +57,8 @@ export class EmploymentHistoryFormComponent implements OnInit {
       new FormGroup({
         jobTitle: new FormControl(''),
         employer: new FormControl(''),
-        startDate: new FormControl(''),
-        endDate: new FormControl(''),
+        startDate: new FormControl(moment()),
+        endDate: new FormControl(moment()),
         location: new FormControl(''),
         description: new FormControl(''),
       })

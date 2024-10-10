@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -34,10 +34,9 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './skills-form.component.html',
   styleUrl: './skills-form.component.scss',
 })
-export class SkillsFormComponent {
-  @Output()
-  skillsFormArrayReady: EventEmitter<FormControlReadyEvent> =
-    new EventEmitter<FormControlReadyEvent>();
+export class SkillsFormComponent implements OnInit {
+  skillsFormArrayReady = output<FormControlReadyEvent>();
+
   skillsFormArray: FormArray<any> = new FormArray(<any>[]);
 
   constructor() {}

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -12,9 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { DatePipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { SortableAccordionPanelComponent } from '../sortable-accordion-panel/sortable-accordion-panel.component';
 import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor.component';
+import { MonthYearPickerComponent } from '../month-year-picker/month-year-picker.component';
+import moment from 'moment';
 
 @Component({
   selector: 'app-education-form',
@@ -30,14 +32,15 @@ import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor
     CommonModule,
     SortableAccordionPanelComponent,
     CommonNgxEditorComponent,
-],
+    MonthYearPickerComponent,
+
+  ],
   templateUrl: './education-form.component.html',
-  styleUrl: './education-form.component.scss'
+  styleUrl: './education-form.component.scss',
 })
-export class EducationFormComponent {
-  @Output()
-  educationFormArrayReady: EventEmitter<FormControlReadyEvent> =
-    new EventEmitter<FormControlReadyEvent>();
+export class EducationFormComponent implements OnInit {
+  educationFormArrayReady = output<FormControlReadyEvent>();
+
   educationFormArray: FormArray<any> = new FormArray(<any>[]);
 
   constructor() {}
@@ -54,8 +57,8 @@ export class EducationFormComponent {
       new FormGroup({
         school: new FormControl(''),
         degree: new FormControl(''),
-        startDate: new FormControl(''),
-        endDate: new FormControl(''),
+        startDate: new FormControl(moment()),
+        endDate: new FormControl(moment()),
         location: new FormControl(''),
         description: new FormControl(''),
       })

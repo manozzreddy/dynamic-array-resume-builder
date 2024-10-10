@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { ResumeData } from '../../../../../libs/shared-types/src';
 import { SafeHtmlPipe } from '../../../../client/src/app/pipes/safe-html/safe-html.pipe';
+import { FormatDatePipe } from '../pipes/format-date/format-date.pipe';
 
 @Component({
   selector: 'app-basic-template',
   standalone: true,
   imports: [
-    SafeHtmlPipe 
+    SafeHtmlPipe,
+    FormatDatePipe,
   ],
   templateUrl: './basic-template.component.html',
   styleUrl: './basic-template.component.scss',

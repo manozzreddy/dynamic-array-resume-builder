@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Inject,
   inject,
   Input,
-  Output,
+  output,
   TemplateRef,
 } from '@angular/core';
 import {
@@ -57,8 +56,8 @@ export class SortableAccordionPanelComponent {
 
   @Input({ required: true }) entityType!: string;
 
-  @Output() addClicked = new EventEmitter<void>();
-  @Output() deleteClicked = new EventEmitter<number>();
+  addClicked = output();
+  deleteClicked = output<number>();
 
   readonly dialog = inject(MatDialog);
 
@@ -99,8 +98,8 @@ export class SortableAccordionPanelComponent {
       Are you sure you want to delete the selected {{ data.entityType }}?
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button mat-dialog-close>No</button>
-      <button mat-button (click)="delete()" cdkFocusInitial>Delete</button>
+      <button mat-button mat-dialog-close cdkFocusInitial>No</button>
+      <button mat-button (click)="delete()">Delete</button>
     </mat-dialog-actions>
   `,
   standalone: true,

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FormControlReadyEvent } from '../resume-editor.component';
@@ -11,8 +11,7 @@ import { FormControlReadyEvent } from '../resume-editor.component';
   styleUrl: './personal-details-form.component.scss',
 })
 export class PersonalDetailsFormComponent implements OnInit {
-  @Output() personalDetailsFormReady: EventEmitter<FormControlReadyEvent> =
-    new EventEmitter<FormControlReadyEvent>();
+  personalDetailsFormReady = output<FormControlReadyEvent>();
 
   public personalDetailsForm: FormGroup;
 
