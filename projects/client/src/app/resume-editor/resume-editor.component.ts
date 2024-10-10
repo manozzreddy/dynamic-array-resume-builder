@@ -15,11 +15,10 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
-  ProfessionalExperience,
   ResumeData,
 } from '../../../../../libs/shared-types/src';
-import { MonthYearPickerComponent } from './month-year-picker/month-year-picker.component';
 import { Moment } from 'moment';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-resume-editor',
@@ -49,8 +48,8 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formDataChangesSubscription = this.resumeForm.valueChanges.subscribe(
-      (resumeData) => {
-        console.log(resumeData);
+      (value) => {
+        let resumeData = _.cloneDeep(value);
 
         /// TODO(Manoj): Refactor this portion.
         for (let index in resumeData['experience']) {
@@ -91,7 +90,7 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
         this.getResumeCrafterWindow?.postMessage(
           resumeData as ResumeData,
-          'http://localhost:58618/'
+          'http://localhost:55038/'
         );
       }
     );
