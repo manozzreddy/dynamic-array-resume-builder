@@ -51,6 +51,8 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
       (value) => {
         let resumeData = _.cloneDeep(value);
 
+        console.log(resumeData);
+
         /// TODO(Manoj): Refactor this portion.
         for (let index in resumeData['experience']) {
           let experience = resumeData['experience'][index];
@@ -90,7 +92,7 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
         this.getResumeCrafterWindow?.postMessage(
           resumeData as ResumeData,
-          'http://localhost:55038/'
+          'http://localhost:59445/'
         );
       }
     );
@@ -117,5 +119,5 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
 export interface FormControlReadyEvent {
   name: string;
-  form: FormGroup | FormControl<string | null> | FormArray<any>;
+  form: FormGroup | FormControl<any> | FormArray<any>;
 }
