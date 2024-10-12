@@ -14,7 +14,7 @@ import {
   moveItemInArray,
   CdkDragHandle,
 } from '@angular/cdk/drag-drop';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NgTemplateOutlet } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -46,7 +46,7 @@ import {
   styleUrl: './sortable-accordion-panel.component.scss',
 })
 export class SortableAccordionPanelComponent {
-  @Input({ required: true }) formControls!: FormGroup[];
+  @Input({ required: true }) formArray! : FormArray<any>;
 
   @Input({ required: true }) panelTitleTemplate!: TemplateRef<any>;
 
@@ -67,6 +67,12 @@ export class SortableAccordionPanelComponent {
       $event.previousIndex,
       $event.currentIndex
     );
+
+    this.formArray.updateValueAndValidity();
+  }
+
+  get formControls(): FormGroup[] {
+    return this.formArray?.controls as FormGroup[];
   }
 
   onAdd() {

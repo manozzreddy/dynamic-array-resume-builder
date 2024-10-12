@@ -14,6 +14,7 @@ export interface PersonalDetails {
   fullName: string;
   location: string;
   phoneNumber: string;
+  photo: string;
 }
 
 export interface ProfessionalExperience {

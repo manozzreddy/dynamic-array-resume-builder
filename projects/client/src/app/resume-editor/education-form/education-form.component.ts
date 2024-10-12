@@ -66,10 +66,8 @@ export class EducationFormComponent implements OnInit {
   }
 
   deleteEducation(index: number) {
-    this.educationFormArray.removeAt(index);
-  }
+    this.educationFormArray?.updateValueAndValidity();
 
-  get formControls(): FormGroup[] {
-    return this.educationFormArray?.controls as FormGroup[];
+    this.educationFormArray.removeAt(index);
   }
 }

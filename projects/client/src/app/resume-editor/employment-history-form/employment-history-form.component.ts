@@ -68,8 +68,4 @@ export class EmploymentHistoryFormComponent implements OnInit {
   deleteEmployment(index: number) {
     this.employmentHistoryFormArray.removeAt(index);
   }
-
-  get formControls(): FormGroup[] {
-    return this.employmentHistoryFormArray?.controls as FormGroup[];
-  }
 }

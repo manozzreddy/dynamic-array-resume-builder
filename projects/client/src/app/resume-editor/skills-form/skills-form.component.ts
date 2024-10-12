@@ -60,8 +60,4 @@ export class SkillsFormComponent implements OnInit {
   deleteSkill(index: number) {
     this.skillsFormArray.removeAt(index);
   }
-
-  get formControls(): FormGroup[] {
-    return this.skillsFormArray?.controls as FormGroup[];
-  }
 }

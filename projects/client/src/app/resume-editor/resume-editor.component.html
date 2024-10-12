@@ -1,5 +1,8 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-10">
-  <form [formGroup]="resumeForm" class="p-3 md:p-5 lg:p-7 grid gap-y-8 mb-10">    
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-10 lg:h-full">
+  <form
+    [formGroup]="resumeForm"
+    class="p-3 md:p-5 lg:p-7 grid gap-y-8 pb-10 lg:overflow-y-auto"
+  >
     <app-personal-details-form
       (personalDetailsFormReady)="subFormControlReady($event)"
     ></app-personal-details-form>
@@ -17,5 +20,6 @@
       (skillsFormArrayReady)="subFormControlReady($event)"
     ></app-skills-form>
   </form>
+
   <app-resume-preview></app-resume-preview>
 </div>
