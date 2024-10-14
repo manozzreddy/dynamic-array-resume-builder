@@ -1,3 +1,19 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/* 
+ * Reset Tailwind CSS styles by setting all properties to their initial values.
+ * This class is useful when you want to negate all Tailwind CSS styles for a specific element.
+ */
+ .revert-tailwind {
+    all: initial;
+}
+
+/* 
+ * Revert Tailwind CSS styles for all child elements of an element with the `revert-tailwind` class.
+ * This ensures that child elements also reset their properties to the default browser styles.
+ */
+.revert-tailwind>* {
+    all: revert;
+}

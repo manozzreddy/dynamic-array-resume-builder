@@ -1,0 +1,25 @@
+<div class="flex flex-row items-center">
+  @if(photoUrl){
+  <img
+    class="h-24 w-24 rounded-full object-cover"
+    [src]="photoUrl"
+    alt="Your"
+  />
+  }@else{
+  <div class="h-24 w-24 rounded-full bg-[#BCBCBC]"></div>
+  }
+
+  <button mat-flat-button class="ml-3" (click)="fileInput.click()">
+    <mat-icon fontIcon="upload"></mat-icon>
+    <span class="uppercase">Upload photo</span>
+  </button>
+
+  <!-- Hidden file input for photo upload -->
+  <input
+    type="file"
+    accept="image/*"
+    (change)="onFileSelected($event)"
+    #fileInput
+    hidden
+  />
+</div>

@@ -1,0 +1,20 @@
+<app-toolbar [isLoggedIn]="true"></app-toolbar>
+
+<div class="p-10">
+  <div class="mat-headline-small">Your Documents</div>
+
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="RESUME">
+      <app-create-new-card></app-create-new-card>
+      <div class="mat-headline-small !mt-4 mb-2">Resume Templates</div>
+      <div class="flex flex-wrap gap-8 ml-10">
+        @for (image of resumeTemplates; track $index) {
+        <img [src]="image" class="w-52 h-72 shadow-xl" alt="Resume Thumbnail" />
+        }
+      </div>
+    </mat-tab>
+    <mat-tab label="COVER LETTER">
+      <app-create-new-card></app-create-new-card>
+    </mat-tab>
+  </mat-tab-group>
+</div>

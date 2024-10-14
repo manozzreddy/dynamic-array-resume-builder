@@ -1,29 +1,35 @@
 export interface ResumeData {
-  fullName: string;
-  phoneNumber: string;
-  email: string;
-  location: string;
-  professionalSummary: string;
+  personalDetails: PersonalDetails;
+  professionalSummary: string | null; // HTML
 
-  experience: ProfessionalExperience[];
-  education: Education[];
-  certifications: string[];
-  technicalSkills: string[];
-  languages: string[];
+  experience?: ProfessionalExperience[];
+  education?: Education[];
+  certifications?: string[];
+  technicalSkills?: string[];
+  languages?: string[];
+}
+
+export interface PersonalDetails {
+  email: string;
+  fullName: string;
+  location: string;
+  phoneNumber: string;
+  photo: string;
 }
 
 export interface ProfessionalExperience {
-  company: string;
-  role: string;
+  jobTitle: string;
+  employer: string;
   startDate: string; // ISO date format (YYYY-MM-DD)
   endDate: string; // ISO date format (YYYY-MM-DD) or 'Present'
-  responsibilities: string[];
+  description: string | null; // HTML
 }
 
 export interface Education {
-  institution: string;
   degree: string;
+  institution: string;
   startDate: string; // ISO date format (YYYY-MM-DD)
   endDate: string; // ISO date format (YYYY-MM-DD)
-  achievements?: string[];
+  location: string;
+  description: string | null; // HTML
 }

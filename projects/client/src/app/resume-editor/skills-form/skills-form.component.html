@@ -1,0 +1,50 @@
+<div class="mat-headline-small">Skills</div>
+<div class="mat-body-large">
+  Write 2-4 short, energetic sentences about how great you are. Mention the role
+  and what you did. What were the big achievements? Describe your motivation and
+  list your skills.
+</div>
+
+<app-sortable-accordion-panel
+  [formArray]="skillsFormArray"
+  [panelTitleTemplate]="panelTitle"
+  [panelDescriptionTemplate]="panelDescription"
+  [formTemplate]="form"
+  entityType="skill"
+  (addClicked)="addSkill()"
+  (deleteClicked)="deleteSkill($event)"
+>
+</app-sortable-accordion-panel>
+
+<ng-template #panelTitle let-item>
+  @let skill = item.get("skill")?.value;
+
+  {{ skill?.length > 0 ? skill : "(Not Specified)" }}
+</ng-template>
+
+<ng-template #panelDescription let-item>
+  @let proficiency = item.get("proficiency")?.value;
+  {{ proficiency }}
+</ng-template>
+
+<ng-template #form let-item>
+  <div [formGroup]="item">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+      <mat-form-field>
+        <mat-label>Skill</mat-label>
+        <input matInput formControlName="skill" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Level</mat-label>
+        <mat-select formControlName="level">
+          <mat-option value="novice">Novice</mat-option>
+          <mat-option value="beginner">Beginner</mat-option>
+          <mat-option value="intermediate">Intermediate</mat-option>
+          <mat-option value="advanced">Advanced</mat-option>
+          <mat-option value="Expert">Expert</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</ng-template>

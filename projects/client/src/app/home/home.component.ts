@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ResumeThumbnailsComponent } from '../resume-thumbnails/resume-thumbnails.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ContributorProfileComponent } from '../contributor-profile/contributor-profile.component';
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,8 @@ import { ContributorProfileComponent } from '../contributor-profile/contributor-
   imports: [
     MatButtonModule,
     ResumeThumbnailsComponent,
-    MatToolbarModule,
-    ContributorProfileComponent
+    ContributorProfileComponent,
+    ToolbarComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
