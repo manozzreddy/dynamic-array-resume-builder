@@ -81,7 +81,7 @@ export class SortableAccordionPanelComponent {
       .open(ConfirmationDialog, {
         width: '350px',
         data: {
-          entityType: this.entityType,
+          entityType: this.entityType(),
         },
       })
       .afterClosed()

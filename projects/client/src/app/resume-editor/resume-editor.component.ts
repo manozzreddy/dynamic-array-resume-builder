@@ -17,11 +17,19 @@ import { Subscription } from 'rxjs';
 import { ResumeData } from '../../../../../libs/shared-types/src';
 import { Moment } from 'moment';
 import _ from 'lodash';
+import { MatRippleModule } from '@angular/material/core';
+import { CertificationsFormComponent } from './certifications-form/certifications-form.component';
+import { HobbiesFormComponent } from './hobbies-form/hobbies-form.component';
+import { InternshipsFormComponent } from './internships-form/internships-form.component';
+import { ReferencesFormComponent } from './references-form/references-form.component';
+import { LanguagesFormComponent } from './languages-form/languages-form.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-resume-editor',
   standalone: true,
   imports: [
+    CommonModule,
     ToolbarComponent,
     PersonalDetailsFormComponent,
     ProfessionalSummaryFormComponent,
@@ -31,21 +39,53 @@ import _ from 'lodash';
     SkillsFormComponent,
     WebsitesSocialLinksFormComponent,
     ReactiveFormsModule,
+    MatRippleModule,
+    CertificationsFormComponent,
+    HobbiesFormComponent,
+    InternshipsFormComponent,
+    ReferencesFormComponent,
+    LanguagesFormComponent,
   ],
   templateUrl: './resume-editor.component.html',
   styleUrl: './resume-editor.component.scss',
 })
 export class ResumeEditorComponent implements OnInit, OnDestroy {
-  resumeForm: FormGroup;
+  resumeForm: FormGroup = new FormGroup({});
   formDataChangesSubscription?: Subscription;
   resumeCrafterWindow?: Window | null;
 
-  constructor() {
-    this.resumeForm = new FormGroup({});
-  }
+  sections = [
+    {
+      name: 'Languages',
+      formName: 'languages',
+      image: 'assets/images/languages.png',
+      isAdded: false,
+    },
+    {
+      name: 'Certifications',
+      formName: 'certifications',
+      image: 'assets/images/certifications.png',
+      isAdded: false,
+    },
+    {
+      name: 'Hobbies',
+      formName: 'hobbies',
+      image: 'assets/images/hobbies.png',
+      isAdded: false,
+    },
+    {
+      name: 'Internships',
+      formName: 'internships',
+      image: 'assets/images/internships.png',
+      isAdded: false,
+    },
+  ];
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.formDataChangesSubscription = this.resumeForm.valueChanges.subscribe(
+    this.formDataChangesSubscription = this.resumeForm.valueChanges
+    .subscribe(
       (value) => {
         let resumeData = _.cloneDeep(value);
 
@@ -112,6 +152,10 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
   subFormControlReady($event: FormControlReadyEvent) {
     this.resumeForm.addControl($event.name, $event.form);
+  }
+
+  toggleSection(index: number) {
+    this.sections[index].isAdded = !this.sections[index].isAdded;
   }
 }
 

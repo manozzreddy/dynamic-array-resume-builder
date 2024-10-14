@@ -1,25 +1,55 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-10 lg:h-full">
-  <form
-    [formGroup]="resumeForm"
-    class="p-3 md:p-5 lg:p-7 grid gap-y-8 pb-10 lg:overflow-y-auto"
-  >
-    <app-personal-details-form
-      (personalDetailsFormReady)="subFormControlReady($event)"
-    ></app-personal-details-form>
-    <app-professional-summary-form
-      (professionalSummaryFormReady)="subFormControlReady($event)"
-    ></app-professional-summary-form>
-    <app-employment-history-form
-      (employmentHistoryFormArrayReady)="subFormControlReady($event)"
-    ></app-employment-history-form>
-    <app-education-form
-      (educationFormArrayReady)="subFormControlReady($event)"
-    ></app-education-form>
-    <app-websites-social-links-form></app-websites-social-links-form>
-    <app-skills-form
-      (skillsFormArrayReady)="subFormControlReady($event)"
-    ></app-skills-form>
-  </form>
+  <div class="grid gap-y-8 p-3 md:p-5 lg:p-7 pb-10 lg:overflow-y-auto">
+    <form [formGroup]="resumeForm" class="grid gap-y-8">
+      <app-personal-details-form
+        (personalDetailsFormReady)="subFormControlReady($event)"
+      ></app-personal-details-form>
+      <app-professional-summary-form
+        (professionalSummaryFormReady)="subFormControlReady($event)"
+      ></app-professional-summary-form>
+      <app-employment-history-form
+        (employmentHistoryFormArrayReady)="subFormControlReady($event)"
+      ></app-employment-history-form>
+      <app-education-form
+        (educationFormArrayReady)="subFormControlReady($event)"
+      ></app-education-form>
+      <app-websites-social-links-form></app-websites-social-links-form>
+      <app-skills-form
+        (skillsFormArrayReady)="subFormControlReady($event)"
+      ></app-skills-form>
+
+      @for (item of sections; track $index) { @if(item.isAdded){ @switch
+      (item.formName) { @case ('certifications') {
+      <app-certifications-form></app-certifications-form>
+      } @case ('hobbies') {
+      <app-hobbies-form></app-hobbies-form>
+      } @case ('internships') {
+      <app-internships-form></app-internships-form>
+      } @case ('references') {
+      <app-references-form></app-references-form>
+      } @case ('languages') {
+      <app-languages-form
+        (languagesFormArrayReady)="subFormControlReady($event)"
+      ></app-languages-form>
+      } } } }
+    </form>
+
+    <div class="mat-headline-small">Add sections</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      @for (item of sections; track $index) {
+      <button
+        matRipple
+        class="flex items-center cursor-pointer"
+        [ngClass]="{ 'opacity-50': item.isAdded }"
+        (click)="toggleSection($index)"
+      >
+        <img [src]="item.image" class="w-12 h-12 mr-4" [alt]="item.name" />
+        <div class="mat-title-large">{{ item.name }}</div>
+      </button>
+      }
+    </div>
+  </div>
 
   <app-resume-preview></app-resume-preview>
 </div>
