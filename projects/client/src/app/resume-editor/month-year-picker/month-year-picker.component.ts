@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  input,
   Input,
   ViewEncapsulation,
 } from '@angular/core';
@@ -60,18 +61,18 @@ export const MY_FORMATS = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthYearPickerComponent {
-  @Input({required : true}) control!: FormControl;
-  @Input({required : true}) hint! : string;
+  control = input.required<FormControl>();
+  hint = input.required<string>();
 
   setMonthAndYear(
     normalizedMonthAndYear: Moment,
     datepicker: MatDatepicker<Moment>
   ) {
-    const ctrlValue : Moment = this.control.value ?? moment();
+    const ctrlValue : Moment = this.control().value?? moment();
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
 
-    this.control.setValue(ctrlValue);
+    this.control().setValue(ctrlValue);
     datepicker.close();
   }
 }

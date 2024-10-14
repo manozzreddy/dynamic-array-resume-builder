@@ -3,7 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControlReadyEvent } from '../resume-editor.component';
-import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor.component';
+import { WysiwygEditorComponent } from '../wysiwyg-editor/wysiwyg-editor.component';
 
 @Component({
   selector: 'app-professional-summary-form',
@@ -13,7 +13,7 @@ import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonNgxEditorComponent,
+    WysiwygEditorComponent,
   ],
   templateUrl: './professional-summary-form.component.html',
   styleUrl: './professional-summary-form.component.scss',

@@ -14,9 +14,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import {
-  ResumeData,
-} from '../../../../../libs/shared-types/src';
+import { ResumeData } from '../../../../../libs/shared-types/src';
 import { Moment } from 'moment';
 import _ from 'lodash';
 
@@ -40,7 +38,7 @@ import _ from 'lodash';
 export class ResumeEditorComponent implements OnInit, OnDestroy {
   resumeForm: FormGroup;
   formDataChangesSubscription?: Subscription;
-  resumeCrafterWindow: Window | null | undefined;
+  resumeCrafterWindow?: Window | null;
 
   constructor() {
     this.resumeForm = new FormGroup({});
@@ -92,7 +90,7 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
         this.getResumeCrafterWindow?.postMessage(
           resumeData as ResumeData,
-          'https://dynamic-array-resume-crafter.web.app/'
+          'http://localhost:63923/'
         );
       }
     );

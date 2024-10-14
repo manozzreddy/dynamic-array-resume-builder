@@ -14,9 +14,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 import { SortableAccordionPanelComponent } from '../sortable-accordion-panel/sortable-accordion-panel.component';
-import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor.component';
 import { MonthYearPickerComponent } from '../month-year-picker/month-year-picker.component';
 import moment from 'moment';
+import { WysiwygEditorComponent } from '../wysiwyg-editor/wysiwyg-editor.component';
 
 @Component({
   selector: 'app-education-form',
@@ -31,9 +31,8 @@ import moment from 'moment';
     MatExpansionModule,
     CommonModule,
     SortableAccordionPanelComponent,
-    CommonNgxEditorComponent,
     MonthYearPickerComponent,
-
+    WysiwygEditorComponent,
   ],
   templateUrl: './education-form.component.html',
   styleUrl: './education-form.component.scss',

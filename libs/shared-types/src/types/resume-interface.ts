@@ -1,6 +1,6 @@
 export interface ResumeData {
   personalDetails: PersonalDetails;
-  professionalSummary: string;
+  professionalSummary: string | null; // HTML
 
   experience?: ProfessionalExperience[];
   education?: Education[];
@@ -22,7 +22,7 @@ export interface ProfessionalExperience {
   employer: string;
   startDate: string; // ISO date format (YYYY-MM-DD)
   endDate: string; // ISO date format (YYYY-MM-DD) or 'Present'
-  description: string;
+  description: string | null; // HTML
 }
 
 export interface Education {
@@ -31,5 +31,5 @@ export interface Education {
   startDate: string; // ISO date format (YYYY-MM-DD)
   endDate: string; // ISO date format (YYYY-MM-DD)
   location: string;
-  description: string;
+  description: string | null; // HTML
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -10,6 +10,5 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrl: './toolbar.component.scss',
 })
 export class ToolbarComponent {
-  @Input() isLoggedIn : boolean = false;
-
+  isLoggedIn = input<boolean>(false);
 }

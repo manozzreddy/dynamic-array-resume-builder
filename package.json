@@ -26,8 +26,8 @@
     "express": "^4.18.2",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
-    "ngx-editor": "^18.0.0",
     "ngx-panzoom": "^19.0.0",
+    "ngx-quill": "^26.0.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

@@ -10,7 +10,10 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <ng-container
-            *ngTemplateOutlet="panelTitleTemplate; context: { $implicit: item }"
+            *ngTemplateOutlet="
+              panelTitleTemplate();
+              context: { $implicit: item }
+            "
           >
           </ng-container>
         </mat-panel-title>
@@ -18,7 +21,7 @@
         <mat-panel-description>
           <ng-container
             *ngTemplateOutlet="
-              panelDescriptionTemplate;
+              panelDescriptionTemplate();
               context: { $implicit: item }
             "
           >
@@ -28,11 +31,15 @@
 
       <!-- Expansion panel body -->
       <ng-container
-        *ngTemplateOutlet="formTemplate; context: { $implicit: item }"
+        *ngTemplateOutlet="formTemplate(); context: { $implicit: item }"
       ></ng-container>
     </mat-expansion-panel>
 
-    <button class="mx-2 opacity-40" mat-icon-button (click)="onTapDelete($index)">
+    <button
+      class="mx-2 opacity-40"
+      mat-icon-button
+      (click)="onTapDelete($index)"
+    >
       <mat-icon>delete_outlined</mat-icon>
     </button>
   </div>
@@ -41,5 +48,5 @@
 
 <button mat-button class="mt-2" (click)="onAdd()">
   <mat-icon fontIcon="add"></mat-icon>
-  Add {{ entityType }}
+  Add {{ entityType() }}
 </button>

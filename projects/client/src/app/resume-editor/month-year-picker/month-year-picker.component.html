@@ -1,6 +1,6 @@
 <mat-form-field class="w-full">
-  <mat-label>{{ hint }}</mat-label>
-  <input matInput [matDatepicker]="dp" [formControl]="control" />
+  <mat-label>{{ hint() }}</mat-label>
+  <input matInput [matDatepicker]="dp" [formControl]="control()" />
   <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
   <mat-datepicker
     #dp

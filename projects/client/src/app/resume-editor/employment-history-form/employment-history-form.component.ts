@@ -14,9 +14,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { DatePipe, CommonModule } from '@angular/common';
 import { SortableAccordionPanelComponent } from '../sortable-accordion-panel/sortable-accordion-panel.component';
-import { CommonNgxEditorComponent } from '../common-ngx-editor/common-ngx-editor.component';
 import moment from 'moment';
 import { MonthYearPickerComponent } from '../month-year-picker/month-year-picker.component';
+import { WysiwygEditorComponent } from '../wysiwyg-editor/wysiwyg-editor.component';
 
 @Component({
   selector: 'app-employment-history-form',
@@ -31,8 +31,9 @@ import { MonthYearPickerComponent } from '../month-year-picker/month-year-picker
     MatExpansionModule,
     CommonModule,
     SortableAccordionPanelComponent,
-    CommonNgxEditorComponent,
     MonthYearPickerComponent,
+    WysiwygEditorComponent,
+
   ],
   providers: [DatePipe],
   templateUrl: './employment-history-form.component.html',

@@ -3,6 +3,7 @@ import {
   Component,
   Inject,
   inject,
+  input,
   Input,
   output,
   TemplateRef,
@@ -46,15 +47,11 @@ import {
   styleUrl: './sortable-accordion-panel.component.scss',
 })
 export class SortableAccordionPanelComponent {
-  @Input({ required: true }) formArray! : FormArray<any>;
-
-  @Input({ required: true }) panelTitleTemplate!: TemplateRef<any>;
-
-  @Input({ required: true }) panelDescriptionTemplate!: TemplateRef<any>;
-
-  @Input({ required: true }) formTemplate!: TemplateRef<any>;
-
-  @Input({ required: true }) entityType!: string;
+  formArray = input.required<FormArray<any>>();
+  panelTitleTemplate = input.required<TemplateRef<any>>();
+  panelDescriptionTemplate = input.required<TemplateRef<any>>();
+  formTemplate = input.required<TemplateRef<any>>();
+  entityType = input.required<string>();
 
   addClicked = output();
   deleteClicked = output<number>();
@@ -68,11 +65,11 @@ export class SortableAccordionPanelComponent {
       $event.currentIndex
     );
 
-    this.formArray.updateValueAndValidity();
+    this.formArray().updateValueAndValidity();
   }
 
   get formControls(): FormGroup[] {
-    return this.formArray?.controls as FormGroup[];
+    return this.formArray()?.controls as FormGroup[];
   }
 
   onAdd() {
