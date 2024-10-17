@@ -84,6 +84,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage" : true,
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/client/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
@@ -178,6 +179,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage" : true,
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/resume-crafter/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
