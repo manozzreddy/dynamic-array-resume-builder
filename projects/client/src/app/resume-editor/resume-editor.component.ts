@@ -130,7 +130,7 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
         this.getResumeCrafterWindow?.postMessage(
           resumeData as ResumeData,
-          'http://localhost:58710/'
+          'https://dynamic-array-resume-crafter.web.app/'
         );
       }
     );

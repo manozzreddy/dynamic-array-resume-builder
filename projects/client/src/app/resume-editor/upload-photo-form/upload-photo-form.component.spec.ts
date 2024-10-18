@@ -8,9 +8,8 @@ describe('UploadPhotoFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UploadPhotoFormComponent]
-    })
-    .compileComponents();
+      imports: [UploadPhotoFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UploadPhotoFormComponent);
     component = fixture.componentInstance;
