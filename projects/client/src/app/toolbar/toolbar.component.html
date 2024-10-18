@@ -1,0 +1,9 @@
+<mat-toolbar class="flex justify-between mat-elevation-z4">
+  <img class="h-full py-2" src="assets/images/logo.png" alt="Resume Builder" />
+
+  @if(isLoggedIn()){ }@else {
+  <div class="flex items-center justify-end">
+    <button mat-stroked-button><span class="uppercase">Log in</span></button>
+  </div>
+  }
+</mat-toolbar>

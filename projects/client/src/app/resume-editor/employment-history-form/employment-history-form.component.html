@@ -1,0 +1,72 @@
+<div class="mat-headline-small">Employment history</div>
+<div class="mat-body-large">
+  Write 2-4 short, energetic sentences about how great you are. Mention the role
+  and what you did. What were the big achievements? Describe your motivation and
+  list your skills.
+</div>
+
+<app-sortable-accordion-panel
+  [formArray]="employmentHistoryFormArray"
+  [panelTitleTemplate]="panelTitle"
+  [panelDescriptionTemplate]="panelDescription"
+  [formTemplate]="form"
+  entityType="employment"
+  (addClicked)="addEmployment()"
+  (deleteClicked)="deleteEmployment($event)"
+>
+</app-sortable-accordion-panel>
+
+<ng-template #panelTitle let-item>
+  @let jobTitle = item.get("jobTitle")?.value;
+  @let employer = item.get("employer")?.value;
+
+  {{ jobTitle?.length > 0 ? jobTitle : "(Not Specified)" }}
+
+  @if(jobTitle?.length > 0  && employer?.length > 0){
+    at {{employer}}
+  }
+</ng-template>
+
+<ng-template #panelDescription let-item>
+  @let startDate = item.get("startDate")?.value; @let endDate =
+  item.get("endDate")?.value;
+
+  {{ startDate | date : "MMM YYYY" }}
+  @if(startDate && endDate){ - }
+  {{ endDate | date : "MMM YYYY" }}
+</ng-template>
+
+<ng-template #form let-item>
+  <div [formGroup]="item">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+      <mat-form-field>
+        <mat-label>Job title</mat-label>
+        <input matInput formControlName="jobTitle" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Employer</mat-label>
+        <input matInput formControlName="employer" />
+      </mat-form-field>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+      <div class="grid grid-cols-2 gap-x-4">
+        <app-month-year-picker
+          hint="Start date"
+          [control]="item.get('startDate')"
+        ></app-month-year-picker>
+        <app-month-year-picker
+          hint="End date"
+          [control]="item.get('endDate')"
+        ></app-month-year-picker>
+      </div>
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location" />
+      </mat-form-field>
+    </div>
+
+    <app-wysiwyg-editor [control]="item.get('description')"></app-wysiwyg-editor>
+
+  </div>
+</ng-template>

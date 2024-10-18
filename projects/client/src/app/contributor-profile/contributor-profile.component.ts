@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -6,13 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [MatIconModule],
   templateUrl: './contributor-profile.component.html',
-  styleUrl: './contributor-profile.component.scss',
 })
 export class ContributorProfileComponent {
-  @Input({ required: true }) contributorInfo!: string;
-  @Input({ required: true }) imageUrl!: string;
-  @Input() githubUrl?: string;
-  @Input() linkedinUrl?: string;
-  @Input() portfolioUrl?: string;
-
+  contributorInfo = input.required<string>();
+  imageUrl = input.required<string>();
+  githubUrl = input<string>();
+  linkedinUrl = input<string>();
+  portfolioUrl = input<string>();
 }
