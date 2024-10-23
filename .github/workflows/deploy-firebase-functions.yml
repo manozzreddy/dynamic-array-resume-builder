@@ -28,5 +28,6 @@ jobs:
 
     - name: Deploy to Firebase
       env:
+        #TODO(Manoj): Authenticating with `FIREBASE_TOKEN` is deprecated and will be removed in a future major version of `firebase-tools`. Instead, use a service account key with `GOOGLE_APPLICATION_CREDENTIALS`
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       run: firebase deploy --only functions
