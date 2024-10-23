@@ -30,5 +30,6 @@ module.exports = {
     "import/no-unresolved": 0,
     "object-curly-spacing": [2, "always"],
     "indent": ["error", 2],
+    'linebreak-style': 0,
   },
 };
