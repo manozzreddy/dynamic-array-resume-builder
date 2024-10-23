@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ResumeData } from '../../../../libs/shared-types/src';
 import {
@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { Functions, httpsCallable } from '@angular/fire/functions';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
   resumeCrafterWindow: Window | null | undefined;
   resumeForm: FormGroup;
   formDataChangesSubscription?: Subscription;
+  private functions: Functions = inject(Functions);
 
   resumeData: ResumeData = {
     fullName: 'John Doe',
@@ -208,7 +210,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.formDataChangesSubscription?.unsubscribe();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const iframe = document.querySelector('iframe');
 
     this.resumeCrafterWindow = iframe?.contentWindow;
@@ -221,6 +223,10 @@ export class AppComponent implements OnInit, OnDestroy {
         );
       }
     );
+
+    const callable = httpsCallable(this.functions,'generateResume');
+
+    await callable({});
   }
 
   get experience(): FormArray {
