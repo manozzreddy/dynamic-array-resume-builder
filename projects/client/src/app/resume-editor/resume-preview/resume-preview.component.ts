@@ -1,13 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  Functions,
-  httpsCallable,
-  httpsCallableFromURL,
-} from '@angular/fire/functions';
+import { Functions, httpsCallableFromURL } from '@angular/fire/functions';
 import { saveAs } from 'file-saver';
-import { ResumeFile } from '../../../../../../libs/shared-types/src/types/resume-file-interface';
 
 @Component({
   selector: 'app-resume-preview',
@@ -24,13 +19,15 @@ export class ResumePreviewComponent {
       'https://us-central1-dynamic-array-resume-builder.cloudfunctions.net/generateResume'
     );
 
-    let response = await callable();
-    const resumeFile = response.data as ResumeFile;
-
-    const blob = new Blob([resumeFile.content], {
-      type: resumeFile.contentType,
+    let response = await callable({
+      name: 'Manoj',
     });
+    
+    const resumeFile = response.data as {
+      content: string;
+      filename: string;
+    };
 
-    saveAs(blob, resumeFile.filename);
+    saveAs(resumeFile.content, resumeFile.filename);
   }
 }
