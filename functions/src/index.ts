@@ -17,14 +17,14 @@ export const generateResume = onCall(
     // Create a new page in the browser
     const page = await browser.newPage();
 
-    await page.goto('https://dynamic-array-resume-crafter.web.app/', {
-      waitUntil: 'networkidle2',
-    });
-
     // set the resume data into the local storage
     await page.evaluateOnNewDocument((data) => {
       window.localStorage.setItem('resumeData', JSON.stringify(data));
-    }, resumeData);
+    }, resumeData);    
+
+    await page.goto('https://dynamic-array-resume-crafter.web.app/', {
+      waitUntil: 'networkidle2',
+    });
 
     // Generate a PDF file
     const resume = await page.pdf({
