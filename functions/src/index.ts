@@ -6,7 +6,7 @@ export const generateResume = onCall(
     memory: '1GiB',
   },
   async (request) => {
-    const data = request.data;
+    const resumeData = request.data?.resumeData ?? {};
 
     const browser = await puppeteer.launch({
       headless: true,
@@ -21,6 +21,10 @@ export const generateResume = onCall(
       waitUntil: 'networkidle2',
     });
 
+    await page.evaluate(() => {
+      localStorage.setItem('resumeData', JSON.stringify(resumeData));
+    });
+
     // Generate a PDF file
     const resume = await page.pdf({
       format: 'A4',
@@ -31,9 +35,10 @@ export const generateResume = onCall(
     await browser.close();
 
     return {
-      filename: `${data.name}-resume.pdf`,
+      filename: `${resumeData.personalDetails.fullName}-resume.pdf`,
       contentType: 'application/pdf',
-      content: Buffer.from(resume),
-    }
+      content:
+        'data:application/pdf;base64,' + Buffer.from(resume).toString('base64'),
+    };
   }
 );

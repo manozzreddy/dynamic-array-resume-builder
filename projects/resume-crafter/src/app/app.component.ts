@@ -16,6 +16,10 @@ export class AppComponent implements OnInit {
   resumeData?: ResumeData | null;
 
   ngOnInit(): void {
+    this.resumeData = JSON.parse(
+      localStorage.getItem('resumeData') ?? '{}'
+    );
+    
     window.addEventListener('message', (event) => {
       // Client App origin
       this.resumeData = event.data as ResumeData;
