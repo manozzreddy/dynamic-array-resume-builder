@@ -1,32 +1,45 @@
-import { onRequest } from 'firebase-functions/v2/https';
+import { onCall } from 'firebase-functions/v2/https';
 import * as puppeteer from 'puppeteer';
 
-export const generateResume = onRequest(async (request, response) => {
-  const browser = await puppeteer.launch({
-    headless: true,
-    timeout: 120000,
-    args: ['--no-sandbox'],
-  });
+export const generateResume = onCall(
+  {
+    memory: '1GiB',
+  },
+  async (request) => {
+    const resumeData = request.data?.resumeData ?? {};
 
-  // Create a new page in the browser
-  const page = await browser.newPage();
+    const browser = await puppeteer.launch({
+      headless: true,
+      timeout: 120000,
+      args: ['--no-sandbox'],
+    });
 
-  await page.goto('https://dynamic-array-resume-crafter.web.app/', {
-    waitUntil: 'networkidle2',
-  });
+    // Create a new page in the browser
+    const page = await browser.newPage();
 
-  // Generate a PDF file
-  const resume = await page.pdf({
-    format: 'A4',
-    printBackground: true,
-  });
+    // set the resume data into the local storage
+    await page.evaluateOnNewDocument((data) => {
+      window.localStorage.setItem('resumeData', JSON.stringify(data));
+    }, resumeData);
 
-  // Close the browser
-  await browser.close();
+    await page.goto('https://dynamic-array-resume-crafter.web.app/', {
+      waitUntil: 'networkidle2',
+    });
 
-  // Set response headers for the PDF
-  response.setHeader('Content-Type', 'application/pdf');
-  response.setHeader('Content-disposition', 'inline; filename=Resume.pdf');
+    // Generate a PDF file
+    const resume = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+    });
 
-  response.send(Buffer.from(resume));
-});
+    // Close the browser
+    await browser.close();
+
+    return {
+      filename: `${resumeData.personalDetails.fullName}-resume.pdf`,
+      contentType: 'application/pdf',
+      content:
+        'data:application/pdf;base64,' + Buffer.from(resume).toString('base64'),
+    };
+  }
+);
