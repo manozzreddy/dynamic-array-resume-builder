@@ -33,7 +33,7 @@ export const generateResume = onCall(
     return {
       filename: `${data.name}-resume.pdf`,
       contentType: 'application/pdf',
-      content: resume.toString('base64'),
+      content: Buffer.from(resume).toString('base64'),
     };
   }
 );
