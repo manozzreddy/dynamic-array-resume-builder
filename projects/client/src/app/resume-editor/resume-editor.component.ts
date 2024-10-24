@@ -170,9 +170,7 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
     const callable = httpsCallable(this.functions, 'generateResume');
 
     let response = await callable({
-      ...this.resumeData,
-      /// TODO(Manoj):
-      name: this.resumeData?.personalDetails.fullName,
+      resumeData : this.resumeData,
     });
 
     const resumeFile = response.data as {
