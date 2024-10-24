@@ -1,11 +1,13 @@
-import { onRequest } from 'firebase-functions/v2/https';
+import { onCall } from 'firebase-functions/v2/https';
 import * as puppeteer from 'puppeteer';
 
-export const generateResume = onRequest(
+export const generateResume = onCall(
   {
     memory: '1GiB',
   },
-  async (request, response) => {
+  async (request) => {
+    const data = request.data;
+
     const browser = await puppeteer.launch({
       headless: true,
       timeout: 120000,
@@ -28,10 +30,10 @@ export const generateResume = onRequest(
     // Close the browser
     await browser.close();
 
-    // Set response headers for the PDF
-    response.setHeader('Content-Type', 'application/pdf');
-    response.setHeader('Content-disposition', 'inline; filename=Resume.pdf');
-
-    response.send(Buffer.from(resume));
+    return {
+      filename: `${data.name}-resume.pdf`,
+      contentType: 'application/pdf',
+      content: Buffer.from(resume),
+    }
   }
 );
