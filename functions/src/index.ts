@@ -6,7 +6,7 @@ export const generateResume = onCall(
     memory: '1GiB',
   },
   async (request) => {
-    const data = request.data;
+    const resumeData = request.data?.resumeData ?? {};
 
     const browser = await puppeteer.launch({
       headless: true,
@@ -16,6 +16,11 @@ export const generateResume = onCall(
 
     // Create a new page in the browser
     const page = await browser.newPage();
+
+    // set the resume data into the local storage
+    await page.evaluateOnNewDocument((data) => {
+      window.localStorage.setItem('resumeData', JSON.stringify(data));
+    }, resumeData);
 
     await page.goto('https://dynamic-array-resume-crafter.web.app/', {
       waitUntil: 'networkidle2',
@@ -31,7 +36,7 @@ export const generateResume = onCall(
     await browser.close();
 
     return {
-      filename: `${data.name}-resume.pdf`,
+      filename: `${resumeData.personalDetails.fullName}-resume.pdf`,
       contentType: 'application/pdf',
       content:
         'data:application/pdf;base64,' + Buffer.from(resume).toString('base64'),
