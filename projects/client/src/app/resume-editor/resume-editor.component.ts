@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ResumePreviewComponent } from './resume-preview/resume-preview.component';
 import { PersonalDetailsFormComponent } from './personal-details-form/personal-details-form.component';
 import { ProfessionalSummaryFormComponent } from './professional-summary-form/professional-summary-form.component';
@@ -24,6 +24,8 @@ import { InternshipsFormComponent } from './internships-form/internships-form.co
 import { ReferencesFormComponent } from './references-form/references-form.component';
 import { LanguagesFormComponent } from './languages-form/languages-form.component';
 import { CommonModule } from '@angular/common';
+import { Functions, httpsCallable } from '@angular/fire/functions';
+import saveAs from 'file-saver';
 
 @Component({
   selector: 'app-resume-editor',
@@ -53,6 +55,7 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
   resumeForm: FormGroup = new FormGroup({});
   formDataChangesSubscription?: Subscription;
   resumeCrafterWindow?: Window | null;
+  private readonly functions: Functions = inject(Functions);
 
   sections = [
     {
@@ -81,11 +84,12 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
     },
   ];
 
+  resumeData?: ResumeData;
+
   constructor() {}
 
   ngOnInit(): void {
-    this.formDataChangesSubscription = this.resumeForm.valueChanges
-    .subscribe(
+    this.formDataChangesSubscription = this.resumeForm.valueChanges.subscribe(
       (value) => {
         let resumeData = _.cloneDeep(value);
 
@@ -128,8 +132,12 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
           }
         }
 
+        this.resumeData = resumeData as ResumeData;
+
+        console.log(JSON.stringify(this.resumeData));
+
         this.getResumeCrafterWindow?.postMessage(
-          resumeData as ResumeData,
+          this.resumeData,
           'https://dynamic-array-resume-crafter.web.app/'
         );
       }
@@ -156,6 +164,23 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
 
   toggleSection(index: number) {
     this.sections[index].isAdded = !this.sections[index].isAdded;
+  }
+
+  async download() {
+    const callable = httpsCallable(this.functions, 'generateResume');
+
+    let response = await callable({
+      ...this.resumeData,
+      /// TODO(Manoj):
+      name: this.resumeData?.personalDetails.fullName,
+    });
+
+    const resumeFile = response.data as {
+      content: string;
+      filename: string;
+    };
+
+    saveAs(resumeFile.content, resumeFile.filename);
   }
 }
 
