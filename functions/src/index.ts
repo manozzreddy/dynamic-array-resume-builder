@@ -21,7 +21,7 @@ export const generateResume = onCall(
       waitUntil: 'networkidle2',
     });
 
-    /// set the resume data into the local storage
+    // set the resume data into the local storage
     await page.evaluateOnNewDocument((data) => {
       window.localStorage.setItem('resumeData', JSON.stringify(data));
     }, resumeData);
