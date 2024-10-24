@@ -34,6 +34,6 @@ export const generateResume = onCall(
       filename: `${data.name}-resume.pdf`,
       contentType: 'application/pdf',
       content: Buffer.from(resume),
-    }
+    };
   }
 );
