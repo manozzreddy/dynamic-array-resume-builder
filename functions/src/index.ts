@@ -21,9 +21,10 @@ export const generateResume = onCall(
       waitUntil: 'networkidle2',
     });
 
-    await page.evaluate(() => {
-      localStorage.setItem('resumeData', JSON.stringify(resumeData));
-    });
+    /// set the resume data into the local storage
+    await page.evaluateOnNewDocument((data) => {
+      window.localStorage.setItem('resumeData', JSON.stringify(data));
+    }, resumeData);
 
     // Generate a PDF file
     const resume = await page.pdf({
