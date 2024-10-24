@@ -16,6 +16,7 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
 import { getPerformance, providePerformance } from '@angular/fire/performance';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,15 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideFirebaseApp(() =>
-      initializeApp({
-        projectId: 'dynamic-array-resume-builder',
-        appId: '1:314758267226:web:86e2fa8067c6c67d573363',
-        storageBucket: 'dynamic-array-resume-builder.appspot.com',
-        apiKey: 'AIzaSyDdkvtKQqzVJ-9sdWL9Zc3dYml_R7Jt3IE',
-        authDomain: 'dynamic-array-resume-builder.firebaseapp.com',
-        messagingSenderId: '314758267226',
-        measurementId: 'G-Q75TB7Z815',
-      })
+      initializeApp(environment)
     ),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),
