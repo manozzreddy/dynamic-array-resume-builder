@@ -20,7 +20,7 @@ export const generateResume = onCall(
     // set the resume data into the local storage
     await page.evaluateOnNewDocument((data) => {
       window.localStorage.setItem('resumeData', JSON.stringify(data));
-    }, resumeData);    
+    }, resumeData);
 
     await page.goto('https://dynamic-array-resume-crafter.web.app/', {
       waitUntil: 'networkidle2',
