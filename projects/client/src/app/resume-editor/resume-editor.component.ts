@@ -24,8 +24,7 @@ import { InternshipsFormComponent } from './internships-form/internships-form.co
 import { ReferencesFormComponent } from './references-form/references-form.component';
 import { LanguagesFormComponent } from './languages-form/languages-form.component';
 import { CommonModule } from '@angular/common';
-import { Functions, httpsCallable } from '@angular/fire/functions';
-import saveAs from 'file-saver';
+import { ResumeService } from '../services/resume/resume.service';
 
 @Component({
   selector: 'app-resume-editor',
@@ -50,12 +49,14 @@ import saveAs from 'file-saver';
   ],
   templateUrl: './resume-editor.component.html',
   styleUrl: './resume-editor.component.scss',
+  providers : [
+    ResumeService,
+  ]
 })
 export class ResumeEditorComponent implements OnInit, OnDestroy {
   resumeForm: FormGroup = new FormGroup({});
   formDataChangesSubscription?: Subscription;
   resumeCrafterWindow?: Window | null;
-  private readonly functions: Functions = inject(Functions);
 
   sections = [
     {
@@ -85,6 +86,8 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
   ];
 
   resumeData?: ResumeData;
+
+  private readonly resumeService = inject(ResumeService);
 
   constructor() {}
 
@@ -167,18 +170,9 @@ export class ResumeEditorComponent implements OnInit, OnDestroy {
   }
 
   async download() {
-    const callable = httpsCallable(this.functions, 'generateResume');
-
-    let response = await callable({
-      resumeData : this.resumeData,
-    });
-
-    const resumeFile = response.data as {
-      content: string;
-      filename: string;
-    };
-
-    saveAs(resumeFile.content, resumeFile.filename);
+    if (this.resumeData) {
+      this.resumeService.download(this.resumeData);
+    }
   }
 }
 

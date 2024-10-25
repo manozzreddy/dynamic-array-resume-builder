@@ -1,3 +1,7 @@
+@if(isDownloadInProgress$ | async){
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
 <div class="bg-gray-50 h-full p-10">
   <div class="flex flex-row gap-4 justify-center">
     <button mat-stroked-button>
@@ -5,7 +9,11 @@
       Change template
     </button>
 
-    <button mat-flat-button (click)="download()">
+    <button
+      mat-flat-button
+      (click)="download()"
+      [disabled]="isDownloadInProgress$ | async"
+    >
       <mat-icon fontIcon="download"></mat-icon>
       <span class="uppercase">Download</span>
     </button>
