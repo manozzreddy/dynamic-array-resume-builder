@@ -3,6 +3,7 @@ import { Functions, httpsCallable } from '@angular/fire/functions';
 import { BehaviorSubject } from 'rxjs';
 import { ResumeData } from '../../../../../../libs/shared-types/src';
 import saveAs from 'file-saver';
+import { ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
 
 @Injectable()
 export class ResumeService {
@@ -11,6 +12,8 @@ export class ResumeService {
   );
   isDownloadInProgress$ = this.isDownloadInProgressSubject.asObservable();
   private readonly functions: Functions = inject(Functions);
+
+  private readonly storage = inject(Storage);
 
   /**
    * Initiates the download of a resume based on the provided resume data.
@@ -39,5 +42,19 @@ export class ResumeService {
     }
 
     this.isDownloadInProgressSubject.next(false);
+  }
+
+  async uploadPhoto(input: HTMLInputElement) {
+    if (!input.files) return;
+
+    const files: FileList = input.files;
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files.item(i);
+      if (file) {
+        const storageRef = ref(this.storage, file.name);
+        uploadBytesResumable(storageRef, file);
+      }
+    }
   }
 }
