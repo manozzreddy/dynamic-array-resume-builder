@@ -1,34 +1,76 @@
-name: Deploy Firebase Functions
+name: Deploy Firebase Functions and Hosting
 
-on:
-  push:
-    branches:
-      - main 
-    paths:
-      - 'functions/**'            
+      on:
+        push:
+          branches:
+            - main 
+          paths:
+            - 'functions/**'
+            - 'projects/**'
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+      jobs:
+        deploy-functions:
+          if: contains(github.event.head_commit.message, 'functions')
+          runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+          steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
+          - name: Setup Node.js
+            uses: actions/setup-node@v2
+            with:
+              node-version: '18'
 
-    - name: Install Firebase CLI
-      run: npm install -g firebase-tools
+          - name: Install Firebase CLI
+            run: npm install -g firebase-tools
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./functions
+          - name: Install dependencies
+            run: npm install
+            working-directory: ./functions
 
-    - name: Deploy to Firebase
-      env:
-        #TODO(Manoj): Authenticating with `FIREBASE_TOKEN` is deprecated and will be removed in a future major version of `firebase-tools`. Instead, use a service account key with `GOOGLE_APPLICATION_CREDENTIALS`
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      run: firebase deploy --only functions
+          - name: Authenticate with GCP
+            uses: google-github-actions/auth@v0
+            with:
+              credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+          - name: Set up Cloud SDK
+            uses: google-github-actions/setup-gcloud@v0
+            with:
+              project_id: ${{ secrets.GCP_PROJECT_ID }}
+              service_account_key: ${{ secrets.GCP_SA_KEY }}
+              export_default_credentials: true 
+
+          - name: Deploy Firebase Functions
+            run: firebase deploy --only functions
+
+        deploy-hosting:
+          if: contains(github.event.head_commit.message, 'projects')
+          runs-on: ubuntu-latest
+
+          steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
+
+          - name: Setup Node.js
+            uses: actions/setup-node@v2
+            with:
+              node-version: '18'
+
+          - name: Install Firebase CLI
+            run: npm install -g firebase-tools
+
+          - name: Authenticate with GCP
+            uses: google-github-actions/auth@v0
+            with:
+              credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+          - name: Set up Cloud SDK
+            uses: google-github-actions/setup-gcloud@v0
+            with:
+              project_id: ${{ secrets.GCP_PROJECT_ID }}
+              service_account_key: ${{ secrets.GCP_SA_KEY }}
+              export_default_credentials: true 
+
+          - name: Deploy Firebase Hosting
+            run: firebase deploy --only hosting
