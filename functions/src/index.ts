@@ -26,6 +26,10 @@ export const generateResume = onCall(
       waitUntil: 'networkidle2',
     });
 
+    await page.evaluate(() => {
+      localStorage.setItem('resumeData', JSON.stringify(resumeData));
+    });
+
     // Generate a PDF file
     const resume = await page.pdf({
       format: 'A4',

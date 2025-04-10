@@ -1,0 +1,26 @@
+<div class="mat-headline-small">Personal details</div>
+
+<div class="mt-5" [formGroup]="personalDetailsForm">
+  <app-upload-photo-form
+    (photoFormControlReady)="subFormControlReady($event)"
+  ></app-upload-photo-form>
+
+  <div class="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+    <mat-form-field>
+      <mat-label>Full name</mat-label>
+      <input matInput formControlName="fullName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phoneNumber" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+  </div>
+</div>

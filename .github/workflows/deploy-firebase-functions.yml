@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main 
+      - feat/localstorage-resume-data
     paths:
       - 'functions/**'            
 

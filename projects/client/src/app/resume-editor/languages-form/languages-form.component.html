@@ -1,0 +1,68 @@
+<div class="mat-headline-small">Languages</div>
+<div class="mat-body-large">
+  This section allows you to list the languages you are proficient in. For each
+  language, specify the language name and your level of proficiency, ranging
+  from novice to expert. This information helps highlight your communication
+  skills and can be valuable for roles that require multilingual capabilities.
+  Click "Add" to include a new language, and you can easily rearrange or remove
+  any entries as needed.
+</div>
+
+<app-sortable-accordion-panel
+  [formArray]="languagesFormArray"
+  [panelTitleTemplate]="panelTitle"
+  [panelDescriptionTemplate]="panelDescription"
+  [formTemplate]="form"
+  entityType="language"
+  (addClicked)="addLanguage()"
+  (deleteClicked)="deleteLanguage($event)"
+>
+</app-sortable-accordion-panel>
+
+<ng-template #panelTitle let-item>
+  @let language = item.get("language")?.value;
+
+  {{ language?.length > 0 ? language : "(Not Specified)" }}
+</ng-template>
+
+<ng-template #panelDescription let-item>
+  @let proficiency = item.get("proficiency")?.value;
+  {{ proficiency }}
+</ng-template>
+
+<ng-template #form let-item>
+  <div [formGroup]="item">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+      <mat-form-field>
+        <mat-label>Language</mat-label>
+
+        <input
+          type="text"
+          matInput
+          (focusout)="resetFilteredLanguages()"
+          (keyup)="onEnterLanguage(item)"
+          formControlName="language"
+          [matAutocomplete]="auto"
+        />
+
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (language of filteredLanguages; track $index) {
+          <mat-option [value]="language">
+            {{ language }}
+          </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Level</mat-label>
+        <mat-select formControlName="proficiency">
+          <mat-option value="beginner">Beginner</mat-option>
+          <mat-option value="intermediate">Intermediate</mat-option>
+          <mat-option value="advanced">Advanced</mat-option>
+          <mat-option value="expert">Expert</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</ng-template>
