@@ -1,0 +1,15 @@
+.auth-container {
+    background-image: url('/assets/images/auth-background.webp');
+    background-size: cover;
+    height: 100%;
+    display: flex;
+
+    .card {
+        margin: auto;
+        margin-right: 120px;
+        padding: 60px 40px;
+        width: 500px;
+        border-radius: 28px;
+        background: #FFF;
+    }
+}

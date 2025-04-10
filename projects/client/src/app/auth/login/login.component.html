@@ -1,0 +1,50 @@
+<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <img class="app-logo" src="assets/icons/app-icon.png" alt="Cortiqa">
+
+    <div class="title">Login</div>
+    <div class="subtitle">Welcome! Please enter your details.</div>
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+
+        @if(authForm.get('email')?.touched &&
+        authForm.get('email')?.hasError('required')){
+        <mat-error>Email is required</mat-error>
+        } @else if(authForm.get('email')?.touched &&
+        authForm.get('email')?.hasError('email')){
+        <mat-error>Not a valid email</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input [type]="showPassword() ? 'text' : 'password'" matInput formControlName="password" />
+
+        <button class="toggle-password" type="button" mat-icon-button (click)="toggleShowPassword()" matSuffix>
+            <mat-icon class="material-symbols-outlined">
+                {{ showPassword() ? "visibility" : "visibility_off" }}
+            </mat-icon>
+        </button>
+
+        @if(authForm.get('password')?.touched &&
+        authForm.get('password')?.hasError('required')){
+        <mat-error>Password is required</mat-error>
+        } @else if(authForm.get('password')?.hasError('incorrectPassword')) {
+        <mat-error>Incorrect password</mat-error>
+        }
+    </mat-form-field>
+
+    <div class="auth-options">
+        <mat-checkbox formControlName="rememberMe">Remember Me</mat-checkbox>
+        <button type="button" mat-button (click)="forgotPassword()">Forgot Password?</button>
+    </div>
+
+    <button type="submit" mat-flat-button [disabled]="isLoginInProgress()">Login</button>
+</form>
+
+@if(errorMessage() !== null){
+<div class="error-message">
+    {{errorMessage()}}
+</div>
+}
