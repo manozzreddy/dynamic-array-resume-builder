@@ -1,0 +1,28 @@
+@if(isDownloadInProgress$ | async){
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+<div class="bg-gray-50 h-full p-10">
+  <div class="flex flex-row gap-4 justify-center">
+    <button mat-stroked-button>
+      <mat-icon fontIcon="dashboard"></mat-icon>
+      Change template
+    </button>
+
+    <button
+      mat-flat-button
+      (click)="download()"
+      [disabled]="isDownloadInProgress$ | async"
+    >
+      <mat-icon fontIcon="download"></mat-icon>
+      <span class="uppercase">Download</span>
+    </button>
+  </div>
+  <iframe
+    title="Resume Crafter"
+    src="https://dynamic-array-resume-crafter.web.app/"
+    class="w-full h-full shadow-xl"
+    style="border: none; overflow: hidden"
+  >
+  </iframe>
+</div>
