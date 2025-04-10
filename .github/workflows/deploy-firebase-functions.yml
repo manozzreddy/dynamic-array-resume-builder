@@ -29,18 +29,12 @@ jobs:
         run: npm install
         working-directory: ./functions
 
-      - name: Authenticate with GCP
+      - name: Authenticate with Workload Identity Federation
         uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
-
+        with: 
+           workload_identity_provider: projects/314758267226/locations/global/workloadIdentityPools/github-pool/providers/github
+           service_account: firebase-auth@dynamic-array-resume-builder.iam.gserviceaccount.com
+       
       - name: Deploy Firebase Functions
         run: firebase deploy --only functions
 
@@ -59,17 +53,11 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Authenticate with GCP
+      - name: Authenticate with Workload Identity Federation
         uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
-
+        with: 
+           workload_identity_provider: projects/314758267226/locations/global/workloadIdentityPools/github-pool/providers/github
+           service_account: firebase-auth@dynamic-array-resume-builder.iam.gserviceaccount.com
+           
       - name: Deploy Firebase Hosting
         run: firebase deploy --only hosting
