@@ -3,7 +3,7 @@
 
   @if(isLoggedIn()){ }@else {
   <div class="flex items-center justify-end">
-    <button mat-stroked-button><span class="uppercase">Log in</span></button>
+    <button mat-stroked-button routerLink="/auth"><span class="uppercase">Log in</span></button>
   </div>
   }
 </mat-toolbar>
