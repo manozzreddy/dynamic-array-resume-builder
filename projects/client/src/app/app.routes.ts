@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { AuthGuard as FireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(["auth"]);
 
 export const routes: Routes = [
   {
@@ -14,14 +17,28 @@ export const routes: Routes = [
       import('./home/home.component').then((c) => c.HomeComponent),
   },
   {
-    path: 'dashboard',
-    loadComponent: () =>
-      import('./dashboard/dashboard.component').then((c) => c.DashboardComponent),
-  },
-  {
-    path: 'resume-editor',
-    loadComponent: () =>
-      import('./resume-editor/resume-editor.component').then((c) => c.ResumeEditorComponent),
+    path: '',
+    canActivate: [FireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./dashboard/dashboard.component').then((c) => c.DashboardComponent),
+      },
+      {
+        path: 'resume-editor',
+        canActivate: [FireAuthGuard],
+        data: { authGuardPipe: redirectUnauthorizedToLogin },
+        loadComponent: () =>
+          import('./resume-editor/resume-editor.component').then((c) => c.ResumeEditorComponent),
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+    ]
   },
   {
     path: '**',
